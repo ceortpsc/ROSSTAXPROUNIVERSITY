@@ -1,0 +1,10 @@
+{
+  "public": ["/", "/about", "/programs", "/catalog", "/estore", "/admissions", "/contact", "/founder"],
+  "student": ["/student", "/student/courses", "/student/ebook", "/student/lessons", "/student/assignments", "/student/quizzes", "/student/exams", "/student/grades", "/student/calendar", "/student/messages", "/student/resources", "/student/degree-audit"],
+  "educator": ["/educator", "/educator/courses", "/educator/course-builder", "/educator/lessons", "/educator/assignments", "/educator/gradebook", "/educator/discussions", "/educator/analytics"],
+  "registrar": ["/registrar", "/registrar/enrollment", "/registrar/sections", "/registrar/records", "/registrar/transcripts", "/registrar/degree-audit", "/registrar/completion"],
+  "staff": ["/staff", "/staff/onboarding", "/staff/student-services", "/staff/tickets", "/staff/communications"],
+  "administration": ["/admin", "/admin/identity", "/admin/rbac", "/admin/policies", "/admin/finance", "/admin/reports", "/admin/audit", "/admin/settings"],
+  "developer": ["/developer", "/developer/routes", "/developer/apis", "/developer/integrations", "/developer/deployments", "/developer/logs", "/developer/feature-flags"],
+  "api": ["/api/health", "/api/routes", "/api/ai", "/api/enrollment", "/api/courses", "/api/assessments", "/api/grades", "/api/registrar"]
+}
