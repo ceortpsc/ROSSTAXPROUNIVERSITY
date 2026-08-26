@@ -1,0 +1,13 @@
+{
+  "provider": "Microsoft Entra ID",
+  "environment": {
+    "ENTRA_TENANT_ID": "",
+    "ENTRA_CLIENT_ID": "",
+    "ENTRA_CLIENT_SECRET": "",
+    "NEXT_PUBLIC_ENTRA_AUTHORITY": "",
+    "NEXT_PUBLIC_ENTRA_REDIRECT_URI": ""
+  },
+  "gates": ["authentication","mfa","role_membership","resource_ownership","step_up_sensitive_actions"],
+  "roles": ["student","educator","registrar","staff","administrator","developer"],
+  "rules": ["least_privilege","environment_only_secrets","audit_sensitive_actions","no_credentials_in_git"]
+}
