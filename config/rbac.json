@@ -1,0 +1,10 @@
+{
+  "student": ["catalog.read","course.read","ebook.read","lesson.read","assignment.submit","quiz.take","exam.take","grade.read","message.create","resources.read"],
+  "educator": ["course.manage","lesson.manage","assignment.manage","quiz.manage","exam.manage","grade.manage","discussion.manage","student.progress.read"],
+  "registrar": ["enrollment.manage","section.manage","record.read","record.write","transcript.manage","degree_audit.manage","completion.review"],
+  "staff": ["student_service.manage","ticket.manage","communication.send","onboarding.manage"],
+  "administrator": ["*"],
+  "developer": ["route.read","api.manage","integration.manage","deployment.read","logs.read","feature_flag.manage"],
+  "ai_assistant": ["content.assist","tutor.assist","draft.assist","route.assist","never_award_credit","never_change_record"],
+  "finance": ["tuition.read","payment.manage","refund.read"]
+}

@@ -1,0 +1,24 @@
+{
+  "capabilities": [
+    "explain_field",
+    "summarize_instructions",
+    "identify_missing_information",
+    "validate_format",
+    "map_guided_answers",
+    "generate_training_explanations"
+  ],
+  "prohibited": [
+    "invent_form_revision",
+    "invent_government_approval",
+    "forge_signature",
+    "fabricate_identity_attestation",
+    "claim_submission_without_provider_acknowledgement",
+    "replace_human_required_review"
+  ],
+  "routing": {
+    "ambiguous": "human-review",
+    "high-impact": "human-review",
+    "training": "simulation-only"
+  },
+  "disclosure": "This assistance is AI-generated and does not itself constitute government approval or filing confirmation."
+}

@@ -1,0 +1,3 @@
+import './globals.css';
+export const metadata={title:'Ross Tax Pro University',description:'Online accounting and taxation education platform'};
+export default function Layout({children}:{children:React.ReactNode}){return <html lang='en'><body><header><strong>ROSS TAX PRO UNIVERSITY</strong><nav><a href='/'>Home</a><a href='/programs'>Programs</a><a href='/catalog'>Catalog</a><a href='/student'>Student</a><a href='/educator'>Educator</a><a href='/registrar'>Registrar</a></nav></header>{children}<footer>© 2026 Ross Tax Pro Software Co. · Proposed educational platform architecture.</footer></body></html>}

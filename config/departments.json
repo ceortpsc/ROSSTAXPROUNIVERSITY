@@ -1,0 +1,15 @@
+{
+  "departments": {
+    "administration": ["president","provost","deans","executive_admin"],
+    "academic_affairs": ["curriculum","faculty_development","assessment"],
+    "accounting_taxation": ["accounting","federal_taxation","business_taxation","tax_research"],
+    "general_education": ["communication","math","statistics","humanities","social_science","science","technology","ethics"],
+    "registrar": ["enrollment","records","transcripts","degree_audit","completion"],
+    "student_services": ["advising","orientation","support","accessibility","career_services"],
+    "faculty": ["course_delivery","assessment","office_hours","research"],
+    "information_technology": ["platform","identity","security","data","integrations"],
+    "finance": ["tuition","billing","refunds","ecommerce"],
+    "human_resources": ["onboarding","training","employee_records","permissions"],
+    "developer_platform": ["apis","deployments","observability","automation","ai"]
+  }
+}

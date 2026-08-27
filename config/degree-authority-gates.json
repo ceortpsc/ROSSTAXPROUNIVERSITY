@@ -1,0 +1,19 @@
+{
+  "platform":"Ross Tax Pro University",
+  "purpose":"Application-readiness and controlled credential-issuance workflow",
+  "status":"pre-authorization",
+  "legalEntity":"ROSS TAX PRO SOFTWARE CO",
+  "jurisdiction":"Texas",
+  "gates":[
+    {"id":"AUTH-01","name":"Entity qualification","status":"required","evidence":["formation documents","Texas foreign-entity registration"]},
+    {"id":"AUTH-02","name":"Institutional authorization","status":"required","evidence":["applicable Texas authorization/certificate","agency approval evidence"]},
+    {"id":"AUTH-03","name":"Program approval","status":"required","evidence":["approved program applications","catalog approval"]},
+    {"id":"AUTH-04","name":"Academic governance","status":"required","evidence":["curriculum approval","faculty governance records"]},
+    {"id":"AUTH-05","name":"Student-record controls","status":"required","evidence":["registrar procedures","degree-audit controls","audit logs"]},
+    {"id":"AUTH-06","name":"Financial / enrollment disclosures","status":"required","evidence":["approved tuition/refund disclosures","enrollment agreement"]},
+    {"id":"AUTH-07","name":"Credential issuance authorization","status":"required","evidence":["authorized completion decision","verified academic record"]}
+  ],
+  "credentialPolicy":{"autonomousIssuance":false,"humanApprovalRequired":true,"auditRequired":true,"verificationRequired":true},
+  "navigation":["/","/university","/admissions","/programs","/catalog","/registrar","/student/degree-audit","/degree-authority","/governance"],
+  "disclosure":"Do not represent the institution, program, diploma or degree as accredited, authorized, approved, or degree-granting until the applicable external and institutional approvals are actually documented."
+}

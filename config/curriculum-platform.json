@@ -1,0 +1,8 @@
+{
+  "textbook": {"title":"Becoming a Tax Professional","chapters":68,"lessonUnitsPerChapter":18,"lessonUnitsTotal":1224},
+  "learningObjects": ["unit","chapter","lesson","lecture","reading","workbook","assignment","case_study","quiz","exam","discussion","glossary","resource","career_path"],
+  "assessment": {"chapterQuizzes":true,"unitExams":true,"midterm":true,"final":true,"practiceExams":true,"rubrics":true,"answerKeys":true},
+  "studentProgress": ["enrollment","course_progress","assessment_scores","credits_attempted","credits_completed","degree_audit","completion_status"],
+  "delivery": ["self_paced","instructor_led","hybrid"],
+  "devices": ["desktop","tablet","mobile"]
+}

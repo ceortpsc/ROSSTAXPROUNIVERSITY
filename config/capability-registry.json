@@ -1,0 +1,21 @@
+{
+  "version":"1.0.0",
+  "capabilities":[
+    {"id":"course.read","owner":"lms","purpose":"Expose enrolled course content."},
+    {"id":"course.manage","owner":"faculty","purpose":"Create, edit and publish academic course structures.","humanGate":true},
+    {"id":"assignment.submit","owner":"student","purpose":"Submit coursework with evidence and timestamps."},
+    {"id":"assignment.grade","owner":"faculty","purpose":"Evaluate coursework with rubric and feedback.","humanGate":true},
+    {"id":"tutoring.respond","owner":"ai","purpose":"Provide source-aware educational assistance."},
+    {"id":"decision.review","owner":"reasoning","purpose":"Route ambiguous or policy-sensitive decisions to an authorized human."},
+    {"id":"enrollment.create","owner":"student-services","purpose":"Create and validate student enrollment records."},
+    {"id":"course_registration.create","owner":"registrar","purpose":"Register students into approved sections."},
+    {"id":"transcript.issue","owner":"registrar","purpose":"Issue an authorized academic transcript.","humanGate":true},
+    {"id":"degree_completion.review","owner":"registrar","purpose":"Review degree audit completion.","humanGate":true},
+    {"id":"message.send","owner":"notifications","purpose":"Deliver approved notifications."},
+    {"id":"connector.sync","owner":"integration","purpose":"Reconcile versioned external integrations."},
+    {"id":"release.validate","owner":"deployment","purpose":"Run release validation and evidence checks."},
+    {"id":"release.promote","owner":"deployment","purpose":"Promote an approved release.","humanGate":true},
+    {"id":"audit.record","owner":"governance","purpose":"Persist auditable event metadata."},
+    {"id":"security.check","owner":"security","purpose":"Evaluate identity, RBAC and sensitive-action controls."}
+  ]
+}

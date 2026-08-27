@@ -1,0 +1,7 @@
+{
+  "migrationStrategy": "versioned, staged, reversible",
+  "sources": ["curriculum","catalog","courses","users","enrollments","assessments","grades","documents"],
+  "phases": ["inventory","schema-validation","synthetic-load-test","staging-migration","reconciliation","readiness-review","production-cutover"],
+  "controls": ["idempotency","row-count-reconciliation","checksum-validation","PII-minimization","backup-before-cutover","rollback-plan"],
+  "status": "planning"
+}

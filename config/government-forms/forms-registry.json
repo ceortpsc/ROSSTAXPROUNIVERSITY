@@ -1,0 +1,14 @@
+{
+  "registryVersion": "1.0.0",
+  "modes": {
+    "official": {"label": "Official Form Mode", "sourceOfTruth": "authoritative-government-source", "output": "official-form-workflow"},
+    "guided": {"label": "Guided Completion Mode", "sourceOfTruth": "selected-official-revision", "output": "mapped-completion-draft"},
+    "simulation": {"label": "Training Simulation Mode", "sourceOfTruth": "synthetic-training-schema", "output": "clearly-marked-simulation"}
+  },
+  "forms": [
+    {"id":"i9","form":"I-9","issuer":"USCIS","modeSupport":["official","guided","simulation"],"humanReview":true},
+    {"id":"w4","form":"W-4","issuer":"IRS","modeSupport":["official","guided","simulation"],"humanReview":true},
+    {"id":"w9","form":"W-9","issuer":"IRS","modeSupport":["official","guided","simulation"],"humanReview":true}
+  ],
+  "releaseGates":["revision-verified","field-schema-verified","access-control","audit-event","authorized-signature-workflow","human-review-when-required"]
+}

@@ -1,0 +1,14 @@
+{
+  "version":"1.0.0",
+  "integrations":[
+    {"id":"entra","provider":"Microsoft Entra ID","system":"identity","protocol":"OIDC/OAuth2","secretSource":"deployment-environment","healthRoute":"/api/integrations/entra"},
+    {"id":"reasoning","provider":"Ross Tax Pro Reasoning Machine","system":"reasoning","protocol":"internal-api","healthRoute":"/api/integrations/reasoning"},
+    {"id":"tax","provider":"rtpsctaxplatform","system":"tax-platform","protocol":"versioned-api","healthRoute":"/api/integrations/tax"},
+    {"id":"etrac","provider":"ross-primeweb-etrac","system":"etrac","protocol":"versioned-api","healthRoute":"/api/integrations/etrac"},
+    {"id":"irsruntime","provider":"IRSRUNTIME","system":"irs-runtime","protocol":"versioned-api","healthRoute":"/api/integrations/irsruntime"},
+    {"id":"notifications","provider":"SMTP/API provider","system":"notifications","protocol":"SMTP/API","secretSource":"deployment-environment","healthRoute":"/api/integrations/notifications"},
+    {"id":"storage","provider":"Object Storage","system":"content","protocol":"S3-compatible","secretSource":"deployment-environment","healthRoute":"/api/integrations/storage"},
+    {"id":"analytics","provider":"Application Analytics","system":"governance","protocol":"event-stream","healthRoute":"/api/integrations/analytics"}
+  ],
+  "requirements":["versioned contract","correlation id","timeout","retry policy","idempotency for writes","audit event","no secrets in source"]
+}

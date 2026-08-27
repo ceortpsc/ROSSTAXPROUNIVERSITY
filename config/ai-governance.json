@@ -1,0 +1,8 @@
+{
+  "mode": "assistive",
+  "disclosure": true,
+  "capabilities": ["tutoring","content_explanation","study_plans","practice_generation","drafting","navigation","resource_recommendation"],
+  "prohibited_autonomous_actions": ["award_grade","award_degree","issue_credential","alter_transcript","change_identity","escalate_permissions"],
+  "human_review_required": ["grade_override","credential_issuance","degree_completion","financial_refund","academic_exception","identity_change","permission_escalation"],
+  "audit": ["correlation_id","actor_type","task","sources","decision_summary","timestamp"]
+}

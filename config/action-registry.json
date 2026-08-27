@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "actions": [
+    {"id":"enroll.student","system":"student-services","capability":"enrollment.create","route":"/admissions/enroll","trigger":"enrollment_submitted","requiresHuman":false,"audit":true},
+    {"id":"orient.student","system":"student-services","capability":"orientation.launch","route":"/students/orientation","trigger":"enrollment_completed","requiresHuman":false,"audit":true},
+    {"id":"register.course","system":"registrar","capability":"course_registration.create","route":"/registrar/enrollment","trigger":"registration_requested","requiresHuman":false,"audit":true},
+    {"id":"publish.course","system":"faculty","capability":"course.publish","route":"/faculty/courses","trigger":"publish_requested","requiresHuman":true,"audit":true},
+    {"id":"submit.assignment","system":"lms","capability":"assignment.submit","route":"/students/assignments","trigger":"submission_saved","requiresHuman":false,"audit":true},
+    {"id":"grade.assignment","system":"faculty","capability":"assignment.grade","route":"/faculty/gradebook","trigger":"submission_ready","requiresHuman":true,"audit":true},
+    {"id":"generate.tutoring","system":"ai","capability":"tutoring.respond","route":"/api/ai","trigger":"student_question","requiresHuman":false,"audit":false},
+    {"id":"resolve.high_impact","system":"reasoning","capability":"decision.review","route":"/api/reasoning/review","trigger":"confidence_low_or_policy_hit","requiresHuman":true,"audit":true},
+    {"id":"issue.transcript","system":"registrar","capability":"transcript.issue","route":"/registrar/reports","trigger":"transcript_requested","requiresHuman":true,"audit":true},
+    {"id":"degree.review","system":"registrar","capability":"degree_completion.review","route":"/registrar/programs","trigger":"degree_audit_ready","requiresHuman":true,"audit":true},
+    {"id":"notify.student","system":"notifications","capability":"message.send","route":"/notifications","trigger":"notification_queued","requiresHuman":false,"audit":true},
+    {"id":"sync.integration","system":"integration","capability":"connector.sync","route":"/engineering/integrations","trigger":"scheduled_reconciliation","requiresHuman":false,"audit":true},
+    {"id":"validate.release","system":"deployment","capability":"release.validate","route":"/engineering/deployments","trigger":"release_candidate","requiresHuman":false,"audit":true},
+    {"id":"promote.production","system":"deployment","capability":"release.promote","route":"/engineering/deployments","trigger":"approval_received","requiresHuman":true,"audit":true}
+  ]
+}

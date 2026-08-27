@@ -1,0 +1,1 @@
+export async function GET(){return Response.json({ok:true,service:'ROSSTAXPROUNIVERSITY',version:'1.0.0',timestamp:new Date().toISOString(),modules:['lms','ebook','enrollment','assessment','registrar','student-services','ai-assistance']})}

@@ -1,0 +1,34 @@
+{
+  "platform": "Ross Tax Pro University",
+  "registryVersion": "1.0.0",
+  "systems": [
+    {"id":"lms","name":"Learning Management System","domain":"academic","status":"planned-live","purpose":"Course delivery, lessons, assignments, discussions, assessments, progress and completion.","brain":"academic-engine"},
+    {"id":"etextbook","name":"eTextbook Engine","domain":"content","status":"planned-live","purpose":"Table of contents, chapters, lessons, glossary, citations, search, notes and reading progress.","brain":"content-engine"},
+    {"id":"student-services","name":"Student Services","domain":"student","status":"planned-live","purpose":"Admissions, orientation, advising, support, notifications and document workflows.","brain":"student-success-engine"},
+    {"id":"faculty","name":"Faculty Workspace","domain":"academic","status":"planned-live","purpose":"Course authoring, rubrics, assignments, gradebook, feedback and analytics.","brain":"academic-engine"},
+    {"id":"registrar","name":"Registrar","domain":"records","status":"planned-live","purpose":"Enrollment, registration, transcripts, degree audit and completion review.","brain":"records-engine"},
+    {"id":"finance","name":"Finance & Billing","domain":"finance","status":"planned-live","purpose":"Tuition schedules, invoices, payment plans, refunds and finance reporting.","brain":"finance-engine"},
+    {"id":"identity","name":"Microsoft Entra ID","domain":"security","status":"configured-boundary","purpose":"Authentication, SSO, group membership and role claims.","brain":"security-engine"},
+    {"id":"ai","name":"AI Assistance Layer","domain":"intelligence","status":"configured-boundary","purpose":"Tutoring, search, drafting, summarization, routing and decision support with human-review gates.","brain":"reasoning-engine"},
+    {"id":"reasoning","name":"Reasoning Machine","domain":"intelligence","status":"configured-boundary","purpose":"Facts, rules, sources, calculations, confidence, decision evidence and review routing.","brain":"reasoning-engine"},
+    {"id":"tax-platform","name":"Ross Tax Platform Connector","domain":"integration","status":"registered","purpose":"Controlled tax-platform interoperability.","brain":"integration-engine"},
+    {"id":"etrac","name":"PrimeWeb/eTRAC Connector","domain":"integration","status":"registered","purpose":"Transmission and status integration boundary.","brain":"integration-engine"},
+    {"id":"irs-runtime","name":"IRSRUNTIME Connector","domain":"integration","status":"registered","purpose":"IRS runtime integration boundary.","brain":"integration-engine"},
+    {"id":"audit","name":"Audit & Evidence","domain":"governance","status":"planned-live","purpose":"Immutable event evidence and review trail.","brain":"governance-engine"},
+    {"id":"notifications","name":"Notification Hub","domain":"communications","status":"planned-live","purpose":"Email, in-app and event notifications.","brain":"communications-engine"},
+    {"id":"deployment","name":"Deployment Control Plane","domain":"engineering","status":"configured-boundary","purpose":"Preview, staging, release and production orchestration.","brain":"release-engine"}
+  ],
+  "brains": [
+    {"id":"reasoning-engine","purpose":"Resolve facts against explicit rules and source evidence; produce confidence and human-review requirements."},
+    {"id":"academic-engine","purpose":"Map learning outcomes, modules, assessments, grades and progression."},
+    {"id":"content-engine","purpose":"Manage eTextbook structure, search, glossary, citations and content versioning."},
+    {"id":"student-success-engine","purpose":"Drive onboarding, advising, nudges, interventions and support workflows."},
+    {"id":"records-engine","purpose":"Maintain enrollment, transcript and completion workflow state."},
+    {"id":"finance-engine","purpose":"Run approved tuition, billing and refund workflows."},
+    {"id":"security-engine","purpose":"Apply identity, RBAC, least privilege and sensitive-action gates."},
+    {"id":"integration-engine","purpose":"Normalize cross-system contracts, retries, idempotency and provider acknowledgements."},
+    {"id":"governance-engine","purpose":"Create audit evidence, policy checks and exception routing."},
+    {"id":"communications-engine","purpose":"Render and deliver approved notifications with delivery status."},
+    {"id":"release-engine","purpose":"Coordinate build, test, validation and deployment promotion."}
+  ]
+}

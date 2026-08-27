@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "automations": [
+    {"id":"onboarding.sequence","trigger":"enrollment_completed","schedule":null,"steps":["create_student_workspace","assign_orientation","send_welcome_notification","create_initial_checklist"],"owner":"student-success-engine","retry":"idempotent"},
+    {"id":"course.progress.scan","trigger":"schedule","schedule":"0 * * * *","steps":["read_course_progress","detect_at_risk_patterns","create_advising_task","notify_advisor_if_threshold_met"],"owner":"academic-engine","humanGate":"advising_intervention"},
+    {"id":"assignment.deadline.scan","trigger":"schedule","schedule":"15 * * * *","steps":["find_upcoming_deadlines","send_student_nudge","record_notification"],"owner":"communications-engine"},
+    {"id":"grade.review.queue","trigger":"submission_ready","schedule":null,"steps":["validate_submission","run_ai_assistive_check","queue_faculty_review","record_evidence"],"owner":"academic-engine","humanGate":"grading"},
+    {"id":"degree.audit.refresh","trigger":"schedule","schedule":"30 2 * * *","steps":["recompute_progress","check_prerequisites","detect_missing_requirements","queue_registrar_review"],"owner":"records-engine","humanGate":"credential_review"},
+    {"id":"transcript.reconciliation","trigger":"schedule","schedule":"45 2 * * *","steps":["compare_gradebook_to_record_store","flag_mismatches","create_registrar_task"],"owner":"records-engine"},
+    {"id":"integration.reconcile","trigger":"schedule","schedule":"0 */6 * * *","steps":["ping_connectors","compare_versions","retry_safe_operations","record_provider_acknowledgements","create_exception_events"],"owner":"integration-engine"},
+    {"id":"security.health","trigger":"schedule","schedule":"*/15 * * * *","steps":["check_identity_boundary","check_role_registry","check_secret_configuration","emit_health_event"],"owner":"security-engine"},
+    {"id":"content.index","trigger":"content_version_published","schedule":null,"steps":["validate_metadata","index_search","refresh_glossary_links","refresh_citation_map"],"owner":"content-engine"},
+    {"id":"ai.quality.scan","trigger":"schedule","schedule":"0 */4 * * *","steps":["sample_ai_events","check_disclosure","check_source_attribution","flag_high_risk_patterns"],"owner":"reasoning-engine","humanGate":"ai_governance_review"},
+    {"id":"release.pipeline","trigger":"release_candidate","schedule":null,"steps":["validate_routes","run_schema_checks","run_unit_tests","run_access_checks","build_preview","emit_release_evidence"],"owner":"release-engine","humanGate":"production_promotion"},
+    {"id":"backup.evidence","trigger":"schedule","schedule":"0 3 * * *","steps":["snapshot_configuration","snapshot_registry_versions","verify_restore_metadata","record_backup_event"],"owner":"governance-engine"}
+  ]
+}
