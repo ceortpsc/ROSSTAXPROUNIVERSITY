@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "engineVersion": "1.0.0",
+  "modes": {
+    "official": {
+      "label": "Official Form Mode",
+      "purpose": "Use the current authorized government form or official agency workflow.",
+      "controls": ["source-registry","revision-check","field-validation","authorized-signature","audit"]
+    },
+    "guided": {
+      "label": "Guided Completion Mode",
+      "purpose": "Collect answers in Ross Tax Pro UI and map them to the corresponding official-form fields.",
+      "controls": ["questionnaire","field-mapping","required-field-check","human-review","audit"]
+    },
+    "simulation": {
+      "label": "Training Simulation Mode",
+      "purpose": "Use synthetic training forms and scenarios for education; never present output as government-issued.",
+      "controls": ["synthetic-data","training-watermark","scoring","feedback","no-submission"]
+    }
+  },
+  "formFamilies": ["I-9","W-4","W-9"],
+  "releaseGates": [
+    "authoritative-source-confirmed",
+    "revision-current",
+    "identity-and-permission-valid",
+    "required-fields-valid",
+    "submission-authority-valid",
+    "audit-event-created"
+  ],
+  "prohibitions": [
+    "fabricate-government-form",
+    "fabricate-signature",
+    "fabricate-government-approval",
+    "report-submission-without-provider-acknowledgement",
+    "use-training-data-as-live-taxpayer-data"
+  ]
+}
