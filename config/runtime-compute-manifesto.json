@@ -1,0 +1,31 @@
+{
+  "version":"1.0.0",
+  "runtime":"Ross Tax Pro University Application Control Plane",
+  "processors":{
+    "orchestration":"Route -> capability -> processor -> connector -> audit",
+    "types":["request","workflow","rules","calculation","search","analytics","background","integration"],
+    "limits":{"timeoutMs":30000,"maxRetries":3,"maxConcurrentJobs":25},
+    "idempotency":true,
+    "correlationIdRequired":true,
+    "humanGateRequiredFor":["credential_issuance","degree_completion","grade_override","financial_refund","identity_change","privilege_escalation"]
+  },
+  "resolution":{
+    "states":["new","validated","processing","resolved","needs_review","blocked","failed","cancelled"],
+    "inputs":["facts","rules","policy","sourceEvidence","actorContext","requestedAction"],
+    "outputs":["result","confidence","sources","ruleIds","humanReviewRequired","auditEvent"],
+    "conflictPolicy":"route-to-human-review"
+  },
+  "memory":{
+    "layers":["request","session","workflow","application","knowledge","audit"],
+    "defaultRetention":"policy-controlled",
+    "sensitiveData":"restricted-storage-only",
+    "separation":"training-data-must-not-mix-with-production-data",
+    "writePolicy":"versioned-and-audited"
+  },
+  "storage":{
+    "objects":["configuration","curriculum","documents","assessment-artifacts","audit-events","analytics-events"],
+    "requirements":["encryption-at-rest","encryption-in-transit","versioning","integrity-checks","backup","restore-test","access-logging"],
+    "secrets":"deployment-secret-store-only"
+  },
+  "resolutionGuarantees":["no-fabricated-success","provider-acknowledgement-required","stale-regulated-source-blocks-production","high-impact-actions-require-human-review"]
+}
