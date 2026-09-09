@@ -1,0 +1,10 @@
+{
+  "version": "2026.09.09",
+  "institution": "Ross Tax Pro University | Dr. Edward Dee Urquhart Early College High School",
+  "parent": "Ross Tax Pro Software Co.",
+  "public_routes": ["/", "/programs", "/catalog", "/signin", "/signin/student", "/signin/teacher", "/access-pending"],
+  "student_gate": {"entry": "/signin/student", "workspace": "/student", "checks": ["identity", "active_account", "student_role", "enrollment", "class_scope", "resource_permission"], "exam_checks": ["assigned", "release_window", "prerequisites", "attempts_remaining", "identity_verified", "proctor_approval_when_required"]},
+  "staff_gate": {"entry": "/signin/teacher", "workspace": "/teacher", "checks": ["identity", "active_staff_status", "role_membership", "mfa", "assigned_scope", "resource_permission", "step_up_for_sensitive_actions"]},
+  "environment": ["NEXT_PUBLIC_STUDENT_SSO_ENTRYPOINT", "NEXT_PUBLIC_STAFF_SSO_ENTRYPOINT"],
+  "rules": ["least_privilege", "server_side_role_resolution", "no_role_from_gate_selection", "no_secrets_in_git", "audit_sensitive_actions", "deny_by_default"]
+}

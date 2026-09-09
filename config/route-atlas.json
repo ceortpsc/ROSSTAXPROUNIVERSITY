@@ -1,6 +1,7 @@
 {
-  "public": ["/", "/about", "/programs", "/catalog", "/estore", "/admissions", "/contact", "/founder"],
+  "public": ["/", "/about", "/programs", "/catalog", "/estore", "/admissions", "/contact", "/founder", "/signin", "/signin/student", "/signin/teacher", "/access-pending"],
   "student": ["/student", "/student/courses", "/student/ebook", "/student/lessons", "/student/assignments", "/student/quizzes", "/student/exams", "/student/grades", "/student/calendar", "/student/messages", "/student/resources", "/student/degree-audit"],
+  "teacher": ["/teacher", "/teacher/classes", "/teacher/content", "/teacher/assignments", "/teacher/gradebook", "/teacher/benchmarks", "/teacher/proctor", "/teacher/progress", "/teacher/interventions", "/teacher/resources"],
   "educator": ["/educator", "/educator/courses", "/educator/course-builder", "/educator/lessons", "/educator/assignments", "/educator/gradebook", "/educator/discussions", "/educator/analytics"],
   "registrar": ["/registrar", "/registrar/enrollment", "/registrar/sections", "/registrar/records", "/registrar/transcripts", "/registrar/degree-audit", "/registrar/completion"],
   "staff": ["/staff", "/staff/onboarding", "/staff/student-services", "/staff/tickets", "/staff/communications"],

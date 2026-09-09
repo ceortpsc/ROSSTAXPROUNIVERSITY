@@ -1,0 +1,10 @@
+{
+  "version": "2026.09.09",
+  "mode": "assistive_live_verified",
+  "authority_hierarchy": ["IRC", "Treasury Regulations", "binding court authority", "published IRS guidance", "current IRM", "official IRS forms and instructions", "RTPSC educational material"],
+  "live_verification_required": true,
+  "verify": ["IRM section exists", "current revision date", "effective date", "superseding guidance", "applicable tax period", "practitioner authorization"],
+  "workstreams": ["transcripts", "transaction_codes", "freeze_codes", "refund_research", "notices", "penalty_relief", "collections", "examination", "appeals", "TAS", "CAF", "statutes"],
+  "separation_of_authority": {"practitioner": ["research", "evidence_collection", "authorized IRS contact", "forms", "correspondence", "appeal_request", "TAS_request"], "irs_only": ["input_or_reverse_transaction_code", "release_freeze", "issue_refund", "post_adjustment", "approve_abatement", "internal_case_routing", "official_case_closure"]},
+  "prohibited": ["fabricate IRM citation", "infer refund release from one transaction code", "guarantee processing date", "represent IRM as statutory law", "claim internal IRS action without official evidence"]
+}
