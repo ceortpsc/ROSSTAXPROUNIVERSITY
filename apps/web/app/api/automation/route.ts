@@ -1,4 +1,4 @@
-import registry from "../../../../../../config/automation-registry.json";
+import registry from "../../../../../config/automation-registry.json";
 
 export const runtime = "nodejs";
 

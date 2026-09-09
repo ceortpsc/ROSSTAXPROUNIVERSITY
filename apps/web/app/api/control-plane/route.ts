@@ -1,8 +1,8 @@
-import systems from "../../../../../../config/system-registry.json";
-import actions from "../../../../../../config/action-registry.json";
-import capabilities from "../../../../../../config/capability-registry.json";
-import automations from "../../../../../../config/automation-registry.json";
-import integrations from "../../../../../../config/integration-registry.json";
+import systems from "../../../../../config/system-registry.json";
+import actions from "../../../../../config/action-registry.json";
+import capabilities from "../../../../../config/capability-registry.json";
+import automations from "../../../../../config/automation-registry.json";
+import integrations from "../../../../../config/integration-registry.json";
 
 export const runtime = "nodejs";
 
