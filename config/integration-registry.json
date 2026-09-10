@@ -1,7 +1,8 @@
 {
-  "version":"1.0.0",
+  "version":"1.1.0",
   "integrations":[
     {"id":"entra","provider":"Microsoft Entra ID","system":"identity","protocol":"OIDC/OAuth2","secretSource":"deployment-environment","healthRoute":"/api/integrations/entra"},
+    {"id":"google-classroom","provider":"Google Classroom","system":"lms-classroom","protocol":"OAuth2/REST","secretSource":"deployment-environment","healthRoute":"/api/integrations/google-classroom","apiRoute":"/api/classroom","config":"config/google-classroom.json"},
     {"id":"reasoning","provider":"Ross Tax Pro Reasoning Machine","system":"reasoning","protocol":"internal-api","healthRoute":"/api/integrations/reasoning"},
     {"id":"tax","provider":"rtpsctaxplatform","system":"tax-platform","protocol":"versioned-api","healthRoute":"/api/integrations/tax"},
     {"id":"etrac","provider":"ross-primeweb-etrac","system":"etrac","protocol":"versioned-api","healthRoute":"/api/integrations/etrac"},
