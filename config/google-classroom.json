@@ -1,0 +1,36 @@
+{
+  "version": "2026.09.10",
+  "provider": "Google Classroom",
+  "apiBaseUrl": "https://classroom.googleapis.com/v1",
+  "protocol": "OAuth 2.0 + REST",
+  "mode": "server-side delegated connector",
+  "scopes": [
+    "https://www.googleapis.com/auth/classroom.courses",
+    "https://www.googleapis.com/auth/classroom.rosters",
+    "https://www.googleapis.com/auth/classroom.coursework.students",
+    "https://www.googleapis.com/auth/classroom.profile.emails"
+  ],
+  "capabilities": [
+    "courses.list",
+    "courses.create",
+    "teachers.list",
+    "teachers.create",
+    "students.list",
+    "students.create",
+    "courseWork.list",
+    "courseWork.create"
+  ],
+  "writeControls": [
+    "server_only",
+    "integration_admin_key_required",
+    "authorized_staff_only",
+    "audit_required",
+    "deny_by_default"
+  ],
+  "environment": [
+    "GOOGLE_CLASSROOM_CLIENT_ID",
+    "GOOGLE_CLASSROOM_CLIENT_SECRET",
+    "GOOGLE_CLASSROOM_REFRESH_TOKEN",
+    "RTPU_CLASSROOM_INTEGRATION_KEY"
+  ]
+}
