@@ -1,3 +1,5 @@
+import { createGoogleClassroomOAuthState } from '../../../../../../lib/oauth-state';
+
 const scopes = [
   'https://www.googleapis.com/auth/classroom.courses',
   'https://www.googleapis.com/auth/classroom.rosters',
@@ -19,7 +21,7 @@ export async function GET(request: Request) {
 
   const origin = new URL(request.url).origin;
   const redirectUri = process.env.GOOGLE_CLASSROOM_REDIRECT_URI || `${origin}/api/integrations/google-classroom/oauth/callback`;
-  const state = crypto.randomUUID().replaceAll('-', '');
+  const state = createGoogleClassroomOAuthState();
 
   const authorizationUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth');
   authorizationUrl.searchParams.set('client_id', clientId);
@@ -35,8 +37,7 @@ export async function GET(request: Request) {
     status: 302,
     headers: {
       Location: authorizationUrl.toString(),
-      'Cache-Control': 'no-store',
-      'Set-Cookie': `rtpu_classroom_oauth_state=${encodeURIComponent(state)}; Max-Age=600; Path=/api/integrations/google-classroom/oauth; HttpOnly; Secure; SameSite=Lax`
+      'Cache-Control': 'no-store'
     }
   });
 }
