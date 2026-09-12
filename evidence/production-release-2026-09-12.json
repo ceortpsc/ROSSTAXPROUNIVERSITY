@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "2.0",
+  "system": "ROSSTAXPROUNIVERSITY",
+  "environment": "production",
+  "simulationPermitted": false,
+  "repository": "ceortpsc/ROSSTAXPROUNIVERSITY",
+  "branch": "main",
+  "productionUrl": "https://rosstaxprouniversity.onrender.com",
+  "renderServiceId": "srv-dagtjeht0dsc73fokt20",
+  "renderRegion": "ohio",
+  "observedAtUtc": "2026-09-12T03:31:38Z",
+  "configurationRelease": {
+    "sourceCommit": "d67f56d8303f8005d611f7c949ad951cf0471304",
+    "commitMessage": "chore: production cutover purge test and validation artifacts",
+    "renderDeployId": "dep-daicepojo6nc73bgtgng",
+    "renderDeployStatus": "live",
+    "packageVersion": "1.0.2",
+    "autoDeploy": true,
+    "maintenanceMode": false,
+    "suspended": false,
+    "buildCommand": "npm install && npm run build",
+    "startCommand": "npm start"
+  },
+  "productionBuildEvidence": {
+    "dependencyAudit": "0 vulnerabilities reported by npm during Render build",
+    "nextBuild": "compiled successfully",
+    "typescript": "completed successfully",
+    "nextVersion": "16.3.4",
+    "runtimeStart": "Next.js reported Ready",
+    "renderFinalState": "live"
+  },
+  "purge": {
+    "completed": true,
+    "removedFromProductionSourceTree": [
+      ".github/workflows/production-validation.yml",
+      "scripts/production-smoke.mjs",
+      "scripts/validate-control-plane.mjs",
+      "scripts/validate.mjs",
+      "evidence/production-validation-2026-09-12.json"
+    ],
+    "packageScriptsRemoved": [
+      "validate",
+      "test:prod"
+    ],
+    "repositoryTestDataStoreIdentified": false,
+    "rtpuRenderPostgresIdentified": false,
+    "unrelatedDatastoresTouched": false,
+    "scopeNote": "Render workspace inspection found one Postgres instance named foodcarecenterctx-postgres. It is not an RTPU datastore and was intentionally left untouched. No RTPU Postgres instance was identified in the workspace view."
+  },
+  "retainedProductionGovernance": {
+    "engineeringPrinciples": "docs/production-readiness/ENGINEERING-PRINCIPLES.md",
+    "productionLiveChecklist": "docs/production-readiness/PRODUCTION-LIVE-CHECKLIST.md",
+    "evidenceRecord": "evidence/production-release-2026-09-12.json"
+  },
+  "googleClassroom": {
+    "oauthStartRoute": "production live",
+    "oauthCallbackRoute": "production live",
+    "oauthState": "HMAC SHA-256 signed, timing-safe verified, 10-minute maximum age",
+    "requestedScopes": [
+      "https://www.googleapis.com/auth/classroom.courses",
+      "https://www.googleapis.com/auth/classroom.rosters",
+      "https://www.googleapis.com/auth/classroom.coursework.students",
+      "https://www.googleapis.com/auth/classroom.profile.emails"
+    ],
+    "interactiveConsent": "pending",
+    "refreshTokenStored": "not confirmed",
+    "authorizedClassroomRead": "not yet verified",
+    "courseRosterProvisioning": "not yet verified"
+  },
+  "releaseDecision": {
+    "applicationRuntime": "PRODUCTION LIVE",
+    "googleClassroomConnectorCode": "PRODUCTION LIVE",
+    "googleClassroomAuthorization": "PENDING INTERACTIVE GOOGLE CONSENT",
+    "googleClassroomProvisioning": "NOT YET END-TO-END AUTHORIZED"
+  },
+  "evidenceRules": [
+    "No simulated success is recorded as production evidence.",
+    "Google OAuth consent is not inferred from an OAuth redirect.",
+    "Classroom provisioning is not considered live until Google API responses confirm authorized operations.",
+    "Unrelated production data stores are not purged as part of the RTPU cutover."
+  ]
+}
