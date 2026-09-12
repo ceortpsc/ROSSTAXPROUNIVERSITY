@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "service": "ROSSTAXPROUNIVERSITY",
+  "areas": [
+    {"id":"deployments","status":"active","source":"GitHub main -> Render auto-deploy","endpoint":"/api/ops/overview"},
+    {"id":"health-troubleshooting","status":"active","endpoint":"/api/ops/health"},
+    {"id":"security-compliance","status":"active","endpoint":"/api/ops/security"},
+    {"id":"optimization","status":"active","endpoint":"/api/ops/optimization"},
+    {"id":"quotas-reservations","status":"active","endpoint":"/api/ops/quotas"},
+    {"id":"maintenance","status":"active","endpoint":"/api/ops/maintenance"},
+    {"id":"support","status":"active","endpoint":"/api/ops/support"},
+    {"id":"app-topology","status":"active","endpoint":"/api/ops/topology"}
+  ]
+}
