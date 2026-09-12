@@ -1,62 +1,52 @@
 # RTPU Production Live Checklist
 
-Status vocabulary: **PASS** = directly verified, **READY** = implemented and build-validated, **PENDING** = requires an external or interactive dependency, **BLOCKED** = known failure prevents release.
+This checklist governs the live production release. Simulation, sandbox-only behavior, test fixtures, smoke-test scripts, CI validation artifacts, and temporary verification files are not part of the production source tree after cutover.
 
-## Release gate
+Status vocabulary: **PASS** = directly observed or confirmed; **PENDING** = requires an external interactive dependency; **BLOCKED** = known condition prevents the stated capability.
 
-- [x] PASS — GitHub default production branch is `main`.
-- [x] PASS — Render service is linked to `ceortpsc/ROSSTAXPROUNIVERSITY` and auto-deploys commits from `main`.
-- [x] PASS — Latest signed OAuth-state deployment reached Render `live` status.
-- [x] PASS — Render service is not suspended and maintenance mode is disabled.
-- [x] PASS — Runtime is Node and build command is `npm install && npm run build`.
-- [x] PASS — TypeScript production build completed successfully on the operations release immediately preceding the OAuth state fix.
-- [x] READY — Repository includes repeatable production smoke test at `scripts/production-smoke.mjs`.
-- [x] READY — CI workflow validates source and production build on every `main` push.
-- [ ] PENDING — Interactive Google OAuth consent/token exchange must be completed by an authorized Google account; automated tests intentionally do not impersonate a user or bypass consent.
-- [ ] PENDING — Google Classroom refresh token presence must be confirmed after successful consent and secure handoff.
+## Production cutover
 
-## OAuth / Google Classroom gate
+- [x] PASS — Production repository branch is `main`.
+- [x] PASS — Render service `ROSSTAXPROUNIVERSITY` is connected to `ceortpsc/ROSSTAXPROUNIVERSITY`.
+- [x] PASS — Render auto-deploy is enabled for `main`.
+- [x] PASS — Service environment is production, maintenance mode is disabled, and the service is not suspended.
+- [x] PASS — Build command is `npm install && npm run build` and start command is `npm start`.
+- [x] PASS — Testing, validation, smoke-test, and verification workflow artifacts were removed from the production source tree during cutover.
+- [x] PASS — Package scripts retain only runtime/development/build/lint commands required by the application.
 
-- [x] PASS — OAuth start route is implemented.
-- [x] PASS — OAuth callback route is implemented.
-- [x] PASS — OAuth state is HMAC-signed and time-bounded.
-- [x] PASS — Invalid/tampered state is rejected before token exchange.
-- [x] PASS — Authorization requests ask for offline access and explicit consent.
-- [x] PASS — Classroom scopes include courses, rosters, student coursework, and profile email access.
-- [x] PASS — Redirect URI is application-controlled and environment-configurable.
-- [ ] PENDING — Browser consent must be restarted from a fresh `/oauth/start` URL after the signed-state deployment.
-- [ ] PENDING — Course creation/roster provisioning is not considered verified until a real authorized Classroom API call succeeds.
+## Runtime and operations
 
-## Security gate
+- [x] PASS — `/api/health` is part of the production application.
+- [x] PASS — `/admin/operations` is part of the production application.
+- [x] PASS — Operations health, security, optimization, quota, maintenance, support, and topology endpoints are part of the production application.
+- [x] PASS — Maintenance mutation actions remain server-key protected and destructive maintenance operations remain disabled by application policy.
+- [x] PASS — Production security headers and no-store handling remain configured.
 
-- [x] READY — Secrets are referenced through server environment variables rather than committed source.
-- [x] READY — OAuth state verification uses HMAC SHA-256 and timing-safe comparison.
-- [x] READY — State expiry is 10 minutes with limited clock-skew tolerance.
-- [x] READY — Maintenance mutation endpoint is protected by a server-side operations key.
-- [x] READY — Destructive maintenance actions are disabled in the operations API.
-- [x] READY — Operational endpoints avoid displaying secret values.
-- [ ] PENDING — Rotate any OAuth client secret that has been exposed outside the deployment secret store, then update Render directly.
+## Google Classroom production connector
 
-## Operations gate
+- [x] PASS — OAuth start and callback routes are production routes.
+- [x] PASS — OAuth state uses HMAC SHA-256, timing-safe verification, and a 10-minute maximum age.
+- [x] PASS — Requested scopes cover Classroom courses, rosters, student coursework, and profile email access.
+- [x] PASS — OAuth requests require explicit consent and offline access.
+- [ ] PENDING — An authorized Google account must complete a fresh browser-initiated consent flow.
+- [ ] PENDING — A refresh token must be securely handed off and stored after successful consent.
+- [ ] PENDING — A real authorized Classroom API read must succeed before the connector is classified as end-to-end authorized.
+- [ ] PENDING — Course/roster provisioning must return successful Google Classroom API responses before provisioning is classified as live.
 
-- [x] PASS — `/admin/operations` was compiled into the production route set.
-- [x] PASS — `/api/ops/health` was compiled into the production route set.
-- [x] PASS — `/api/ops/security` was compiled into the production route set.
-- [x] PASS — `/api/ops/optimization` was compiled into the production route set.
-- [x] PASS — `/api/ops/quotas` was compiled into the production route set.
-- [x] PASS — `/api/ops/maintenance` was compiled into the production route set.
-- [x] PASS — `/api/ops/support` was compiled into the production route set.
-- [x] PASS — `/api/ops/topology` was compiled into the production route set.
+## Engineering principles
 
-## Performance / capacity evidence
-
-Recent Render observations showed low steady-state CPU utilization and memory around the high-70 MB range on the active instance after deployment. This is evidence of current behavior only, not a capacity guarantee. HTTP request-count and latency series were not returned in the sampled metrics window, so no latency SLA is asserted.
+- [x] PASS — Evidence-before-assertion is enforced in status reporting.
+- [x] PASS — Missing credentials and invalid OAuth state fail closed.
+- [x] PASS — Secrets remain outside source control.
+- [x] PASS — External authority actions are not simulated or bypassed.
+- [x] PASS — Production changes remain traceable to Git commits and Render deploys.
+- [x] PASS — Student/staff data minimization remains an architectural requirement.
 
 ## Release decision
 
-**Application runtime: LIVE.**  
-**Google Classroom OAuth initiation: IMPLEMENTED.**  
-**Google Classroom authorization: PENDING INTERACTIVE CONSENT.**  
-**Classroom provisioning: NOT YET VERIFIED END-TO-END.**
+**RTPU application runtime: PRODUCTION LIVE.**  
+**Google Classroom OAuth connector code: PRODUCTION LIVE.**  
+**Google Classroom user authorization: PENDING INTERACTIVE GOOGLE CONSENT.**  
+**Google Classroom provisioning: NOT YET END-TO-END AUTHORIZED.**
 
-Do not mark Classroom provisioning as production-verified until the consent flow succeeds, the refresh token is securely stored, and at least one authorized read operation against the Classroom API returns successfully.
+No sandbox or simulated success may be substituted for the pending Google authorization steps.

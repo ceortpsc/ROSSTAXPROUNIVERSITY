@@ -1,14 +1,12 @@
 {
   "name": "rosstaxprouniversity",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "validate": "node scripts/validate.mjs",
-    "test:prod": "node scripts/production-smoke.mjs"
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "latest",
