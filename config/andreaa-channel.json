@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0",
+  "channel": "Andreaa Channel",
+  "productionTier": "ultra-lte",
+  "internalLimitMultiplier": 5,
+  "queuePriority": "priority",
+  "reasoning": {
+    "persona": "Andreaa Chan’nel",
+    "roles": ["reasoning-agent", "assistant", "employee", "workflow-orchestrator"],
+    "deepThink": "provider-gated"
+  },
+  "creative": {
+    "image": "adapter-ready",
+    "video": "adapter-ready",
+    "music": "adapter-ready",
+    "flow": "provider-gated"
+  },
+  "development": {
+    "googleAntigravity": "provider-gated",
+    "googleJules": "provider-gated"
+  },
+  "experimental": {
+    "projectGenie": {
+      "status": "age-and-provider-gated",
+      "minimumAge": 18
+    }
+  },
+  "providerPolicy": {
+    "externalQuotas": "passthrough",
+    "subscriptionEntitlements": "provider-enforced",
+    "ageRestrictions": "enforced",
+    "quotaBypass": false
+  }
+}
