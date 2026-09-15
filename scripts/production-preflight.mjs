@@ -5,25 +5,42 @@ import { execFileSync } from 'node:child_process';
 
 const requiredFiles = [
   'package.json',
-  'next.config.mjs',
+  'vite.config.ts',
+  'server/server.ts',
+  'server/oauth-handoff.ts',
+  'web/index.html',
+  'web/src/main.tsx',
+  'web/src/App.tsx',
+  'web/src/styles.css',
   'lib/andreaa-engine.ts',
   'lib/andreaa-channel.ts',
   'lib/lms-integration.ts',
+  'lib/google-classroom.ts',
+  'lib/oauth-state.ts',
   'openapi/andreaa-channel.openapi.yaml',
   'docs/andreaa-channel/PRODUCTION-ENGINEERING-MANUAL.md',
   'docs/andreaa-channel/GOVERNANCE-RBAC.md',
+  'docs/andreaa-channel/LMS-INTEGRATION.md',
   'docs/andreaa-channel/RUNBOOK.md'
 ];
 
 const requiredEnv = ['RTPU_DEPLOY_ENV'];
-const recommendedEnv = ['RTPU_SUPPORT_EMAIL', 'OPS_ADMIN_KEY', 'GOOGLE_CLASSROOM_CLIENT_ID', 'GOOGLE_CLASSROOM_CLIENT_SECRET', 'GOOGLE_CLASSROOM_REDIRECT_URI'];
+const recommendedEnv = [
+  'PUBLIC_BASE_URL',
+  'RTPU_SUPPORT_EMAIL',
+  'OPS_ADMIN_KEY',
+  'RTPU_CLASSROOM_INTEGRATION_KEY',
+  'GOOGLE_CLASSROOM_CLIENT_ID',
+  'GOOGLE_CLASSROOM_CLIENT_SECRET',
+  'GOOGLE_CLASSROOM_REDIRECT_URI'
+];
 
 function pass(label, details = '') { console.log(`PASS  ${label}${details ? ` - ${details}` : ''}`); }
 function warn(label, details = '') { console.log(`WARN  ${label}${details ? ` - ${details}` : ''}`); }
 function fail(label, details = '') { console.error(`FAIL  ${label}${details ? ` - ${details}` : ''}`); process.exitCode = 1; }
 
-console.log('Andreaa Channel production preflight');
-console.log('------------------------------------');
+console.log('Andreaa Channel runtime-v2 production preflight');
+console.log('-----------------------------------------------');
 
 for (const file of requiredFiles) {
   existsSync(file) ? pass(`file:${file}`) : fail(`file:${file}`, 'missing');
@@ -43,6 +60,19 @@ try {
   pass('node', version);
   if (!pkg.engines?.node) warn('package.engines.node', 'not declared');
   else pass('package.engines.node', pkg.engines.node);
+
+  if (pkg.dependencies?.next || pkg.devDependencies?.next) fail('runtime.framework', 'Next.js dependency still present');
+  else pass('runtime.framework', 'Fastify + Vite; no Next.js package dependency');
+
+  for (const dependency of ['fastify', '@fastify/static', '@fastify/helmet', '@fastify/compress', 'react', 'react-dom']) {
+    if (pkg.dependencies?.[dependency]) pass(`dependency:${dependency}`, pkg.dependencies[dependency]);
+    else fail(`dependency:${dependency}`, 'missing');
+  }
+
+  for (const script of ['dev', 'build', 'start', 'typecheck', 'andreaa', 'preflight', 'deploy:production']) {
+    if (pkg.scripts?.[script]) pass(`script:${script}`, pkg.scripts[script]);
+    else fail(`script:${script}`, 'missing');
+  }
 } catch (error) {
   fail('runtime', error instanceof Error ? error.message : String(error));
 }
@@ -51,6 +81,6 @@ if (process.env.RTPU_DEPLOY_ENV && process.env.RTPU_DEPLOY_ENV !== 'production')
   warn('RTPU_DEPLOY_ENV', `expected production, received ${process.env.RTPU_DEPLOY_ENV}`);
 }
 
-console.log('------------------------------------');
+console.log('-----------------------------------------------');
 if (process.exitCode) console.error('PREFLIGHT RESULT: BLOCKED');
 else console.log('PREFLIGHT RESULT: READY');
