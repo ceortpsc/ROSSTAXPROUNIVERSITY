@@ -1,11 +1,11 @@
 {
   "name": "rosstaxprouniversity",
   "private": true,
-  "version": "3.0.0",
+  "version": "4.0.0",
   "type": "module",
   "scripts": {
     "dev": "concurrently -k -n api,web \"npm:dev:api\" \"npm:dev:web\"",
-    "dev:api": "cross-env PORT=8787 RTPU_RELEASE_CHANNEL=alpha tsx watch server/server.ts",
+    "dev:api": "cross-env PORT=8787 RTPU_RELEASE_CHANNEL=alpha RTPU_AI_LMS_ENABLED=true tsx watch server/server.ts",
     "dev:web": "vite --host 0.0.0.0",
     "build": "npm run typecheck && npm run build:web && npm run build:server",
     "build:web": "vite build",
