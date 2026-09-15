@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceType": "rtpu-native-ai-university-v4-production-release",
+  "observedDate": "2026-09-15",
+  "repository": "ceortpsc/ROSSTAXPROUNIVERSITY",
+  "source": {
+    "branch": "main",
+    "releaseCommitBeforeEvidence": "2aaa02dfa7bdc82a5521424471789418f82a7c55",
+    "releaseMessage": "chore: verify native AI LMS in production deploy script"
+  },
+  "architecture": {
+    "applicationVersion": "4.0.0",
+    "deliveryModel": "100% online",
+    "learningRuntime": "RTPU Native AI LMS",
+    "externalLmsDependency": false,
+    "runtimeStack": ["Fastify", "Vite", "React", "TypeScript", "tsup", "Andreaa Channel"],
+    "reasoningAgentCount": 13,
+    "programCount": 7
+  },
+  "nativeAiLms": {
+    "status": "production-built-and-deployed",
+    "routes": [
+      "GET /api/lms",
+      "GET /api/lms/agents",
+      "GET /api/lms/programs",
+      "POST /api/lms/lecture",
+      "POST /api/lms/learning-plan",
+      "POST /api/lms/assessment"
+    ],
+    "clientSurfaces": [
+      "/ai-campus",
+      "/ai-lecture",
+      "/ai-assessment",
+      "/ai-agents",
+      "/student/dashboard",
+      "/faculty/dashboard",
+      "/programs",
+      "/records",
+      "/help"
+    ],
+    "agents": [
+      "AI Provost",
+      "AI Lecturer",
+      "AI Tutor",
+      "AI Academic Advisor",
+      "AI Assessment Designer",
+      "AI Registrar Assistant",
+      "AI Admissions Assistant",
+      "AI Student Success Coach",
+      "AI Faculty Copilot",
+      "AI Academic Quality Agent",
+      "AI University Operations Agent",
+      "AI Accessibility Agent",
+      "AI Career & Practice Coach"
+    ],
+    "lectureSimulation": {
+      "implemented": true,
+      "stages": ["orient", "teach", "reason", "practice", "check", "transfer", "recap"],
+      "generatedInstructionClearlyLabeled": true,
+      "evidenceHashGenerated": true
+    }
+  },
+  "googleClassroomRetirement": {
+    "activeRuntimeRemoved": true,
+    "activeSourceDesignRemoved": true,
+    "recursiveSourceTreeFilenameCheck": "no google-classroom path remained at release commit",
+    "renderCredentialState": "Google Classroom credential values were blanked/disabled through the available Render environment-variable interface; physical key deletion was not exposed by the available action.",
+    "deletedPaths": [
+      "app/admin/integrations/google-classroom/page.tsx",
+      "app/api/integrations/google-classroom/oauth/_store.ts",
+      "app/api/integrations/google-classroom/oauth/callback/route.ts",
+      "app/api/integrations/google-classroom/oauth/handoff/route.ts",
+      "app/api/integrations/google-classroom/oauth/start/route.ts",
+      "app/api/integrations/google-classroom/route.ts",
+      "app/api/classroom/route.ts",
+      "config/google-classroom.json",
+      "lib/google-classroom.ts",
+      "lib/classroom-provisioning.ts",
+      "lib/oauth-state.ts",
+      "server/oauth-handoff.ts"
+    ],
+    "historicalEvidencePolicy": "Prior release evidence may retain historical references for audit integrity; historical evidence is not an active runtime dependency."
+  },
+  "render": {
+    "workspaceId": "tea-d8seq0mq1p3s73bkgek0",
+    "serviceId": "srv-dagtjeht0dsc73fokt20",
+    "productionUrl": "https://rosstaxprouniversity.onrender.com",
+    "releaseDeployId": "dep-dakj0sc0mo2s73eorvgg",
+    "releaseDeployStatus": "live",
+    "releaseDeployFinishedAtUtc": "2026-09-15T11:49:22.054745Z",
+    "rootProbe": {
+      "method": "HEAD",
+      "path": "/",
+      "httpStatus": 200,
+      "responseTimeMs": 119.64800800000012
+    }
+  },
+  "buildEvidence": {
+    "nodeVersionObserved": "26.8.2",
+    "packageVersion": "4.0.0",
+    "typecheck": "passed",
+    "clientBuild": {
+      "status": "passed",
+      "viteVersion": "8.3.0",
+      "transformedModules": 19,
+      "durationMs": 133,
+      "indexHtmlKb": 0.58,
+      "indexHtmlGzipKb": 0.34,
+      "cssKb": 7.55,
+      "cssGzipKb": 2.31,
+      "javascriptKb": 260.52,
+      "javascriptGzipKb": 77.51
+    },
+    "serverBuild": {
+      "status": "passed",
+      "tsupVersion": "8.5.1",
+      "target": "node20",
+      "durationMs": 22,
+      "bundleKb": 41.44,
+      "sourceMapKb": 67.45
+    },
+    "renderBuild": "successful",
+    "serverStartup": "successful"
+  },
+  "governance": {
+    "evidenceBeforeAssertion": true,
+    "generatedInstructionClearlyLabeled": true,
+    "highImpactHumanApprovalRequired": true,
+    "automatedAdmissionsDecision": false,
+    "automatedEmploymentDecision": false,
+    "credentialAuthorityClaimsAutomated": false,
+    "dataMinimization": true,
+    "releaseChannel": "stable"
+  },
+  "explicitBoundaries": {
+    "lectureLearningPlanAssessmentPersistence": "stateless generation services at this release",
+    "admissionsPersistence": "provided by the separate RTPU enrollment service",
+    "durableCourseProgress": "not yet provisioned",
+    "durableGradebook": "not yet provisioned",
+    "durableSubmissions": "not yet provisioned",
+    "durableTranscriptStorage": "not represented as implemented by this AI LMS release",
+    "externalModelProvider": "no external LLM/model provider success is asserted by this evidence record"
+  },
+  "openItems": [
+    "Investigate and remediate the single low-severity npm dependency vulnerability reported during the production build.",
+    "Provision and verify a production datastore before claiming durable LMS progress, gradebook, submissions or transcript persistence."
+  ],
+  "status": "production-live-with-explicit-persistence-and-dependency-advisories"
+}
