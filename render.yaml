@@ -11,21 +11,23 @@ services:
     envVars:
       - key: RTPU_DEPLOY_ENV
         value: production
+      - key: RTPU_RELEASE_CHANNEL
+        value: stable
+      - key: RTPU_AI_LMS_ENABLED
+        value: "true"
+      - key: RTPU_AI_LMS_MODE
+        value: native
+      - key: RTPU_AI_LECTURE_ENABLED
+        value: "true"
+      - key: RTPU_AI_ASSESSMENT_ENABLED
+        value: "true"
+      - key: RTPU_AI_TUTORING_ENABLED
+        value: "true"
+      - key: RTPU_AI_AGENT_MESH_ENABLED
+        value: "true"
       - key: PUBLIC_BASE_URL
         value: https://rosstaxprouniversity.onrender.com
       - key: RTPU_MAINTENANCE_MODE
         value: "false"
-      - key: GOOGLE_CLASSROOM_CLIENT_ID
-        sync: false
-      - key: GOOGLE_CLASSROOM_CLIENT_SECRET
-        sync: false
-      - key: GOOGLE_CLASSROOM_REDIRECT_URI
-        sync: false
-      - key: GOOGLE_CLASSROOM_REFRESH_TOKEN
-        sync: false
-      - key: GOOGLE_CLASSROOM_OAUTH_STATE_SECRET
-        sync: false
-      - key: RTPU_CLASSROOM_INTEGRATION_KEY
-        sync: false
       - key: OPS_ADMIN_KEY
         sync: false
