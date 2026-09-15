@@ -9,6 +9,7 @@ const requiredFiles = [
   'server/server.ts',
   'server/ai-lms-routes.ts',
   'server/platform-routes.ts',
+  'server/credential-records-routes.ts',
   'web/index.html',
   'web/src/main.tsx',
   'web/src/App.tsx',
@@ -18,12 +19,19 @@ const requiredFiles = [
   'lib/andreaa-channel.ts',
   'lib/ai-university.ts',
   'lib/lms-integration.ts',
+  'lib/credential-records.ts',
+  'config/credential-artifact-registry.json',
+  'config/credential-records-registry.json',
+  'db/migrations/001_credential_records.sql',
+  'db/queries/credential_records.sql',
   'openapi/andreaa-channel.openapi.yaml',
   'openapi/ai-lms.openapi.yaml',
+  'openapi/credential-records.openapi.yaml',
   'docs/andreaa-channel/PRODUCTION-ENGINEERING-MANUAL.md',
   'docs/andreaa-channel/GOVERNANCE-RBAC.md',
   'docs/andreaa-channel/LMS-INTEGRATION.md',
   'docs/architecture/AI-UNIVERSITY-V4.md',
+  'docs/records/CREDENTIAL-RECORDS-ARCHITECTURE.md',
   'docs/andreaa-channel/RUNBOOK.md'
 ];
 
@@ -38,7 +46,8 @@ const recommendedEnv = [
   'RTPU_AI_LECTURE_ENABLED',
   'RTPU_AI_ASSESSMENT_ENABLED',
   'RTPU_AI_TUTORING_ENABLED',
-  'RTPU_AI_AGENT_MESH_ENABLED'
+  'RTPU_AI_AGENT_MESH_ENABLED',
+  'RTPU_RECORDS_DATABASE_URL'
 ];
 
 function pass(label, details = '') { console.log(`PASS  ${label}${details ? ` - ${details}` : ''}`); }
