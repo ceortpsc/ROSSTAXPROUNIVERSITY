@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: RTPU Native AI LMS API
+  version: 4.0.0
+  description: First-party learning runtime for Ross Tax Pro University. Generated instruction is labeled and high-impact institutional decisions remain human-controlled.
+servers:
+  - url: https://rosstaxprouniversity.onrender.com
+paths:
+  /api/lms:
+    get:
+      summary: Get AI university runtime snapshot
+      responses:
+        '200':
+          description: Runtime snapshot
+  /api/lms/agents:
+    get:
+      summary: List AI university agents
+      responses:
+        '200':
+          description: Agent registry
+  /api/lms/programs:
+    get:
+      summary: List RTPU academic programs
+      responses:
+        '200':
+          description: Program registry
+  /api/lms/lecture:
+    post:
+      summary: Generate a structured AI lecture simulation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [topic]
+              properties:
+                topic:
+                  type: string
+                  maxLength: 800
+                level:
+                  type: string
+                  maxLength: 120
+                objectives:
+                  type: array
+                  maxItems: 8
+                  items:
+                    type: string
+      responses:
+        '201':
+          description: Lecture session created
+        '400':
+          description: Invalid input
+  /api/lms/learning-plan:
+    post:
+      summary: Generate an adaptive learning plan blueprint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [goal]
+              properties:
+                goal:
+                  type: string
+                  maxLength: 800
+                programId:
+                  type: string
+      responses:
+        '201':
+          description: Learning plan created
+        '400':
+          description: Invalid input
+  /api/lms/assessment:
+    post:
+      summary: Generate a formative assessment blueprint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [topic]
+              properties:
+                topic:
+                  type: string
+                  maxLength: 800
+      responses:
+        '201':
+          description: Assessment blueprint created
+        '400':
+          description: Invalid input
+  /api/andreaa-channel/assist:
+    post:
+      summary: Generate a Tier-10 engineering or institutional execution blueprint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [objective]
+              properties:
+                objective:
+                  type: string
+                context:
+                  type: string
+                tier:
+                  type: integer
+                  minimum: 1
+                  maximum: 10
+                mode:
+                  type: string
+      responses:
+        '201':
+          description: Blueprint created
+components:
+  schemas:
+    EvidenceBoundary:
+      type: object
+      properties:
+        generatedInstructionClearlyLabeled:
+          type: boolean
+          const: true
+        highImpactHumanApproval:
+          type: boolean
+          const: true
+        automatedAdmissionsDecision:
+          type: boolean
+          const: false
+        automatedEmploymentDecision:
+          type: boolean
+          const: false
