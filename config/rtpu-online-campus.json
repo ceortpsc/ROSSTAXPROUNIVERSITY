@@ -1,13 +1,14 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "institution": "Ross Tax Pro University",
   "adoptedBy": "Ross Tax Pro Software Co.",
   "campus": {
-    "name": "RTPU Online Campus",
+    "name": "RTPU AI-Powered Online Campus",
     "productionUrl": "https://rosstaxprouniversity.onrender.com/institution",
+    "aiCampusUrl": "https://rosstaxprouniversity.onrender.com/ai-campus",
     "enrollmentUrl": "https://rtpu-enrollment.onrender.com/",
     "launchTerm": "2026-2027",
-    "googleClassroomOwner": "ceo@rosstaxsoftware.com"
+    "deliveryModel": "100% online"
   },
   "theme": {
     "name": "RTPU Institutional Navy Gold",
@@ -29,22 +30,38 @@
     }
   },
   "lms": {
-    "provider": "Google Classroom",
+    "provider": "RTPU Native AI LMS",
+    "ownership": "first-party",
+    "externalLmsDependency": false,
     "programCount": 7,
-    "courseShellCount": 68,
-    "ownerId": "ceo@rosstaxsoftware.com",
-    "courseNaming": "[COURSE CODE] — [COURSE TITLE]",
-    "sectionNaming": "[TERM] | [PROGRAM TITLE]",
-    "courseStateRequested": "ACTIVE",
-    "autolaunch": true,
-    "idempotency": "name+section",
-    "authorizationRequired": true
+    "reasoningAgentCount": 13,
+    "capabilities": [
+      "course-catalog",
+      "program-pathways",
+      "lesson-generation",
+      "lecture-simulation",
+      "adaptive-tutoring",
+      "assessment-blueprints",
+      "student-dashboard",
+      "faculty-dashboard",
+      "records-routing",
+      "admissions-routing",
+      "accessibility-support",
+      "academic-quality",
+      "career-coaching",
+      "agent-orchestration"
+    ]
   },
   "pages": [
     "/institution",
-    "/signin/student",
-    "/signin/teacher",
-    "/admin/integrations/google-classroom",
+    "/ai-campus",
+    "/ai-lecture",
+    "/ai-assessment",
+    "/ai-agents",
+    "/student/dashboard",
+    "/faculty/dashboard",
+    "/records",
+    "/programs",
     "/andreaa-channel",
     "/andreaa-channel/engine",
     "/andreaa-channel/platform",
@@ -60,9 +77,10 @@
     { "id": "enrolled-agent-prep", "title": "Enrolled Agent Preparation", "courses": 4 }
   ],
   "evidencePolicy": {
-    "classroomCreated": "Only when Google Classroom API returns a created course ID",
-    "classroomExisting": "Only when an existing course matches name and section",
-    "blocked": "Report blocked-authorization-required when provider credentials are unavailable",
-    "noSimulation": true
+    "nativeRuntimeAction": "Complete only when the RTPU runtime returns success evidence",
+    "externallyGovernedOutcome": "Remain pending until the responsible authority verifies the outcome",
+    "generatedInstruction": "Clearly label generated or simulated instructional content",
+    "highImpactDecision": "Require authorized human review",
+    "noSyntheticSuccess": true
   }
 }
