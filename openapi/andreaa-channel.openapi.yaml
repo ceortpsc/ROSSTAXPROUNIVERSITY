@@ -1,0 +1,422 @@
+openapi: 3.1.0
+info:
+  title: Andreaa Channel Production API
+  version: 10.0.0
+  summary: Reasoning, engineering, capability, LMS and operations contracts for ROSSTAXPROUNIVERSITY.
+  description: |
+    Source-controlled API contract for Andreaa Channel. The 1x-10x capacity ladder represents
+    Andreaa Channel internal planning and orchestration budgets only. External provider quotas,
+    subscription entitlements, age restrictions and credentials remain provider-managed.
+servers:
+  - url: https://rosstaxprouniversity.onrender.com
+    description: Production
+  - url: http://localhost:3000
+    description: Local development
+
+tags:
+  - name: Engine
+  - name: Capabilities
+  - name: LMS
+  - name: Health
+  - name: Operations
+  - name: Google Classroom OAuth
+
+paths:
+  /api/andreaa-channel/engine:
+    get:
+      tags: [Engine]
+      operationId: getAndreaaEngine
+      summary: Get the Andreaa standalone engineering engine snapshot.
+      parameters:
+        - in: query
+          name: tier
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10
+            default: 10
+      responses:
+        '200':
+          description: Engine snapshot.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EngineSnapshot'
+    post:
+      tags: [Engine]
+      operationId: createAndreaaBlueprint
+      summary: Convert an engineering objective into a tier-aware implementation blueprint.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [objective]
+              properties:
+                objective:
+                  type: string
+                  minLength: 1
+                  maxLength: 20000
+                tier:
+                  type: integer
+                  minimum: 1
+                  maximum: 10
+                  default: 10
+      responses:
+        '201':
+          description: Generated engineering blueprint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Blueprint'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/andreaa-channel/capabilities:
+    get:
+      tags: [Capabilities]
+      operationId: getAndreaaCapabilities
+      summary: Get Andreaa Channel capability and provider-gate status.
+      parameters:
+        - in: query
+          name: plan
+          schema:
+            type: string
+            enum: [standard, ultra-lte]
+            default: ultra-lte
+      responses:
+        '200':
+          description: Capability snapshot.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /api/lms/integrations:
+    get:
+      tags: [LMS]
+      operationId: getLmsIntegrations
+      summary: Get the LMS provider registry, readiness state, roles and policy controls.
+      responses:
+        '200':
+          description: LMS integration-plane snapshot.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LmsSnapshot'
+
+  /api/health:
+    get:
+      tags: [Health]
+      operationId: getApplicationHealth
+      summary: Lightweight application health endpoint.
+      responses:
+        '200':
+          description: Runtime health.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /api/ops/overview:
+    get:
+      tags: [Operations]
+      operationId: getOperationsOverview
+      summary: Read non-secret production operations metadata.
+      responses:
+        '200':
+          description: Operations overview.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+
+  /api/integrations/google-classroom/oauth/start:
+    get:
+      tags: [Google Classroom OAuth]
+      operationId: startGoogleClassroomOAuth
+      summary: Start a fresh Google Classroom OAuth authorization flow.
+      description: |
+        This route returns an HTTP redirect to Google's authorization endpoint and creates signed
+        state for the callback. The same browser session should complete the OAuth flow.
+      responses:
+        '302':
+          description: Redirect to Google authorization.
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+
+  /api/integrations/google-classroom/oauth/callback:
+    get:
+      tags: [Google Classroom OAuth]
+      operationId: googleClassroomOAuthCallback
+      summary: Receive Google OAuth callback and verify Classroom API authorization.
+      description: |
+        The callback validates signed state, performs the Google token exchange, verifies authorized
+        reads against Classroom userProfiles/me and courses.list, creates a non-secret evidence receipt,
+        and creates a short-lived one-time credential handoff. OAuth authorization cannot be completed
+        without interactive Google account consent.
+      parameters:
+        - in: query
+          name: code
+          schema:
+            type: string
+        - in: query
+          name: state
+          schema:
+            type: string
+        - in: query
+          name: error
+          schema:
+            type: string
+      responses:
+        '200':
+          description: HTML success response with sanitized evidence and one-time handoff ID.
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Consent declined or invalid callback state.
+        '409':
+          description: Required offline credentials were not issued.
+        '502':
+          description: Token exchange or Classroom API verification failed.
+
+components:
+  schemas:
+    Tier:
+      type: object
+      additionalProperties: false
+      required:
+        - level
+        - name
+        - speedClass
+        - internalCapacityMultiplier
+        - maxParallelStages
+        - planningDepth
+        - maxBlueprintNodes
+        - operatingMode
+      properties:
+        level:
+          type: integer
+          minimum: 1
+          maximum: 10
+        name:
+          type: string
+        speedClass:
+          type: string
+        internalCapacityMultiplier:
+          type: integer
+          minimum: 1
+          maximum: 10
+        maxParallelStages:
+          type: integer
+          minimum: 1
+        planningDepth:
+          type: integer
+          minimum: 1
+          maximum: 10
+        maxBlueprintNodes:
+          type: integer
+          minimum: 1
+        operatingMode:
+          type: string
+
+    Competency:
+      type: object
+      additionalProperties: false
+      required: [id, label, mission, minimumTier]
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        mission:
+          type: string
+        minimumTier:
+          type: integer
+          minimum: 1
+          maximum: 10
+
+    EngineSnapshot:
+      type: object
+      required: [schemaVersion, engine, engineVersion, mode, tier, tiers, competencies, principles, guarantees, observedAtUtc]
+      properties:
+        schemaVersion:
+          type: string
+        engine:
+          type: string
+        engineVersion:
+          type: string
+        mode:
+          type: string
+        tier:
+          $ref: '#/components/schemas/Tier'
+        tiers:
+          type: array
+          minItems: 10
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/Tier'
+        competencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Competency'
+        principles:
+          type: array
+          items:
+            type: string
+        guarantees:
+          type: object
+          additionalProperties: true
+        observedAtUtc:
+          type: string
+          format: date-time
+
+    BlueprintStage:
+      type: object
+      required: [order, id, owner, mission, outputs, parallelGroup, gate]
+      properties:
+        order:
+          type: integer
+        id:
+          type: string
+        owner:
+          type: string
+        mission:
+          type: string
+        outputs:
+          type: array
+          items:
+            type: string
+        parallelGroup:
+          type: integer
+        gate:
+          type: string
+          enum: [automatic, evidence, human-approval]
+
+    Blueprint:
+      type: object
+      required:
+        - schemaVersion
+        - engineVersion
+        - blueprintId
+        - createdAtUtc
+        - objective
+        - classification
+        - tier
+        - capacityContract
+        - activeCompetencies
+        - principles
+        - stages
+        - executionPolicy
+      properties:
+        schemaVersion:
+          type: string
+        engineVersion:
+          type: string
+        blueprintId:
+          type: string
+        createdAtUtc:
+          type: string
+          format: date-time
+        objective:
+          type: string
+        classification:
+          type: string
+        tier:
+          $ref: '#/components/schemas/Tier'
+        capacityContract:
+          type: object
+          additionalProperties: true
+        activeCompetencies:
+          type: array
+          items:
+            type: string
+        principles:
+          type: array
+          items:
+            type: string
+        stages:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlueprintStage'
+        executionPolicy:
+          type: object
+          additionalProperties: true
+
+    LmsProvider:
+      type: object
+      required: [id, label, status, auth, apiBase, capabilities, requiredEnvironment, notes]
+      properties:
+        id:
+          type: string
+          enum: [google-classroom, canvas, moodle, blackboard]
+        label:
+          type: string
+        status:
+          type: string
+          enum: [active, configured, adapter-ready, disabled]
+        auth:
+          type: string
+          enum: [oauth2, token, oauth2-or-token]
+        apiBase:
+          type: string
+        capabilities:
+          type: array
+          items:
+            type: string
+        requiredEnvironment:
+          type: array
+          items:
+            type: string
+        notes:
+          type: array
+          items:
+            type: string
+
+    LmsSnapshot:
+      type: object
+      required: [schemaVersion, system, integrationPlane, providers, roles, controls, observedAtUtc]
+      properties:
+        schemaVersion:
+          type: string
+        system:
+          type: string
+        integrationPlane:
+          type: string
+        providers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LmsProvider'
+        roles:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        controls:
+          type: object
+          additionalProperties: true
+        observedAtUtc:
+          type: string
+          format: date-time
+
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
