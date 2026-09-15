@@ -13,83 +13,29 @@ const programs = [
 ];
 
 export default function InstitutionPage() {
-  const [classroom, setClassroom] = useState<JsonValue | null>(null);
+  const [lms, setLms] = useState<JsonValue | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/integrations/google-classroom', { headers: { accept: 'application/json' } })
-      .then(async (response) => {
-        if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
-        return response.json();
-      })
-      .then(setClassroom)
-      .catch((reason) => setError(reason instanceof Error ? reason.message : String(reason)));
+    fetch('/api/lms', { headers: { accept: 'application/json' } })
+      .then(async response => { if (!response.ok) throw new Error(`${response.status} ${response.statusText}`); return response.json(); })
+      .then(setLms)
+      .catch(reason => setError(reason instanceof Error ? reason.message : String(reason)));
   }, []);
 
-  const credentialStatus = classroom?.credentialStatus as Record<string, unknown> | undefined;
-  const launchEvidence = credentialStatus?.launchEvidence as Record<string, unknown> | undefined;
+  const agents = Array.isArray(lms?.agents) ? lms.agents as Array<Record<string, unknown>> : [];
 
-  return (
-    <main className="page-shell">
-      <section className="page-width">
-        <header className="hero">
-          <div className="eyebrow">Ross Tax Pro University • Full Institution Online</div>
-          <h1>RTPU Online Campus</h1>
-          <p>Institutional programs, admissions, learning-management services, Google Classroom delivery, student/teacher access, workforce training and Andreaa Channel engineering are unified in one production campus.</p>
-        </header>
-        <nav className="top-nav" aria-label="Institution navigation">
-          <a href="/">Home</a>
-          <a href="/signin/student">Student Access</a>
-          <a href="/signin/teacher">Faculty Access</a>
-          <a href="https://rtpu-enrollment.onrender.com/">Enrollment</a>
-          <a href="/admin/integrations/google-classroom">Google Classroom</a>
-          <a href="/andreaa-channel">Andreaa Channel</a>
-        </nav>
+  return <main className="page-shell"><section className="page-width">
+    <header className="hero hero-premium"><div className="eyebrow">Ross Tax Pro University • 100% Online AI Institution</div><h1>RTPU AI-Powered Online Campus</h1><p>Institutional programs, admissions, native learning management, AI lecture simulation, tutoring, assessment design, advising, records, student success, faculty support and Andreaa Channel engineering operate as one RTPU-owned online university platform.</p><div className="hero-actions"><a className="button-link button-gold" href="/ai-campus">Enter AI Campus</a><a className="button-link button-ghost" href="https://rtpu-enrollment.onrender.com/">Apply / Enroll</a></div></header>
+    <nav className="top-nav" aria-label="Institution navigation"><a href="/">Home</a><a href="/ai-campus">AI Campus</a><a href="/ai-lecture">Lecture Studio</a><a href="/ai-agents">AI Faculty</a><a href="/student/dashboard">Student</a><a href="/faculty/dashboard">Faculty</a><a href="https://rtpu-enrollment.onrender.com/">Enrollment</a><a href="/andreaa-channel">Andreaa Channel</a></nav>
 
-        <div className="metric-grid">
-          <div className="metric"><strong>7</strong><span>seeded institutional programs</span></div>
-          <div className="metric"><strong>68</strong><span>Google Classroom course shells</span></div>
-          <div className="metric"><strong>2026–2027</strong><span>launch term</span></div>
-          <div className="metric"><strong>{credentialStatus?.configured === true ? 'Connected' : 'Authorization required'}</strong><span>Google Classroom credentials</span></div>
-        </div>
+    <div className="metric-grid"><div className="metric metric-premium"><strong>100%</strong><span>online institution</span></div><div className="metric metric-premium"><strong>13</strong><span>reasoning agents</span></div><div className="metric metric-premium"><strong>7</strong><span>institutional programs</span></div><div className="metric metric-premium"><strong>0</strong><span>external LMS dependencies</span></div></div>
 
-        {error ? <div className="notice notice-error">Classroom status error: {error}</div> : null}
-        <section className="panel">
-          <h2>Institution program catalog</h2>
-          <div className="card-grid">
-            {programs.map(([title, description]) => <article className="card" key={title}>
-              <span className="card-eyebrow">Academic Program</span>
-              <h3>{title}</h3>
-              <p>{description}</p>
-              <strong>RTPU Online • Google Classroom delivery</strong>
-            </article>)}
-          </div>
-        </section>
+    {error ? <div className="notice notice-error">AI LMS status error: {error}</div> : null}
+    <section className="panel"><h2>Institution program catalog</h2><div className="card-grid">{programs.map(([title,description]) => <article className="card card-premium" key={title}><span className="card-eyebrow">Academic Program</span><h3>{title}</h3><p>{description}</p><strong>RTPU Native AI LMS delivery</strong></article>)}</div></section>
 
-        <div className="two-column">
-          <section className="panel">
-            <h2>Admissions & onboarding</h2>
-            <p>Prospective, transfer, foreign-exchange, RTPSC new-hire and PTIN-holder application pathways are served through the RTPU enrollment system.</p>
-            <a className="button-link" href="https://rtpu-enrollment.onrender.com/">Open Enrollment Center</a>
-          </section>
-          <section className="panel">
-            <h2>Google Classroom launch evidence</h2>
-            <pre className="code-block">{JSON.stringify(launchEvidence ?? { status: 'checking' }, null, 2)}</pre>
-          </section>
-        </div>
+    <div className="two-column"><section className="panel"><h2>Admissions & onboarding</h2><p>Prospective, transfer, foreign-exchange, RTPSC new-hire and PTIN-holder application pathways are served through the RTPU enrollment system.</p><a className="button-link" href="https://rtpu-enrollment.onrender.com/">Open Enrollment Center</a></section><section className="panel"><h2>AI university runtime</h2><pre className="code-block">{JSON.stringify({ deliveryModel: lms?.deliveryModel ?? 'checking', externalLmsDependency: lms?.externalLmsDependency ?? false, agentCount: agents.length || 13, capabilities: lms?.capabilities ?? [] }, null, 2)}</pre></section></div>
 
-        <section className="panel">
-          <h2>Institution architecture</h2>
-          <div className="tier-grid">
-            <div className="tier"><strong>Academic delivery</strong><span>Google Classroom courses, rosters and coursework</span></div>
-            <div className="tier"><strong>Enrollment</strong><span>Invites, applications, signatures and admissions clearances</span></div>
-            <div className="tier"><strong>Identity & access</strong><span>Student, faculty and administrative access gateways</span></div>
-            <div className="tier"><strong>Andreaa Channel</strong><span>Planning, architecture, generation and engineering control plane</span></div>
-            <div className="tier"><strong>Operations</strong><span>Health, security, evidence, deployment and provider status</span></div>
-            <div className="tier"><strong>Records</strong><span>Canonical application, program and LMS provisioning data contracts</span></div>
-          </div>
-        </section>
-      </section>
-    </main>
-  );
+    <section className="panel"><h2>Institution architecture</h2><div className="tier-grid"><div className="tier"><strong>Academic delivery</strong><span>RTPU-native courses, AI lectures, tutoring, practice and assessment</span></div><div className="tier"><strong>Enrollment</strong><span>Invites, applications, signatures and admissions clearances</span></div><div className="tier"><strong>Identity & access</strong><span>Student, faculty and administrative access gateways</span></div><div className="tier"><strong>AI faculty mesh</strong><span>Provost, lecturer, tutor, advisor, registrar, quality, accessibility and operations agents</span></div><div className="tier"><strong>Andreaa Channel</strong><span>Planning, architecture, generation and engineering control plane</span></div><div className="tier"><strong>Records & quality</strong><span>Academic records, evidence, accessibility and release controls</span></div></div></section>
+  </section></main>;
 }
