@@ -2,6 +2,7 @@ import { timingSafeEqual } from 'node:crypto';
 import type { FastifyInstance, FastifyRequest } from 'fastify';
 import { admissionsSeedSnapshot, createAdmissionsVerificationRecord } from '../lib/admissions';
 import { backgroundScreeningPolicy, backgroundScreeningReadiness, createBackgroundAuthorization, usStateAndTerritoryCodes } from '../lib/background-screening';
+import { renderAdmissionsControlCenter } from '../lib/admissions-ui';
 
 function secureEqual(left: string | undefined, right: string | undefined) {
   if (!left || !right) return false;
@@ -19,6 +20,8 @@ function requireAdmissionsAdmin(request: FastifyRequest) {
 }
 
 export async function registerAdmissionsRoutes(app: FastifyInstance) {
+  app.get('/admissions', async (_request, reply) => reply.type('text/html').send(renderAdmissionsControlCenter()));
+
   app.get('/api/admissions/seed', async () => ({ ok: true, ...admissionsSeedSnapshot() }));
 
   app.get('/api/admissions/background-policy', async () => ({
