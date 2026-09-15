@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: Ross Tax Pro University Admissions API
+  version: 1.0.0
+  description: Enrollment, admissions verification, clearance and background-authorization contract. Background authorization endpoints do not execute consumer-report searches.
+servers:
+  - url: https://rtpu-enrollment.onrender.com
+paths:
+  /api/enrollment/readiness:
+    get:
+      summary: Enrollment subsystem readiness
+      responses:
+        '200': { description: Readiness snapshot }
+  /api/enrollment/programs:
+    get:
+      summary: Active program catalog and application-track eligibility
+      responses:
+        '200': { description: Program catalog }
+  /api/enrollment/invites:
+    post:
+      summary: Create an enrollment invitation
+      security: [{ enrollmentAdmin: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteRequest'
+      responses:
+        '201': { description: Invitation created }
+        '401': { description: Unauthorized }
+  /api/enrollment/invite:
+    get:
+      summary: Verify and inspect a signed invitation
+      parameters:
+        - in: query
+          name: token
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Verified invitation }
+        '400': { description: Invalid or expired invitation }
+  /api/enrollment/applications:
+    post:
+      summary: Sign, convert and dispatch an enrollment application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token, application]
+              properties:
+                token: { type: string }
+                application: { type: object, additionalProperties: true }
+      responses:
+        '201': { description: Application submitted and delivery confirmed }
+        '400': { description: Invalid application }
+        '503': { description: Signed/converted but delivery not confirmed }
+  /api/enrollment/applications/convert:
+    post:
+      summary: Convert an application into the RTPU canonical package without public submission
+      security: [{ enrollmentAdmin: [] }]
+      responses:
+        '200': { description: Canonical export package }
+        '401': { description: Unauthorized }
+  /api/admissions/seed:
+    get:
+      summary: Admissions requirement catalog and standardized form inventory
+      responses:
+        '200': { description: Institutional seed snapshot }
+  /api/admissions/background-policy:
+    get:
+      summary: Background-authorization policy and U.S. state/territory scope model
+      responses:
+        '200': { description: Policy/readiness snapshot }
+  /api/admissions/verification-records:
+    post:
+      summary: Create an admissions verification and clearance record
+      security: [{ enrollmentAdmin: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerificationRecordRequest'
+      responses:
+        '201': { description: Verification record created }
+        '400': { description: Invalid request }
+        '401': { description: Unauthorized }
+  /api/admissions/background-authorizations:
+    post:
+      summary: Create background-screening authorization evidence only
+      description: Does not execute a criminal, credit, federal, state, county, driving or other consumer-report search.
+      security: [{ enrollmentAdmin: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackgroundAuthorizationRequest'
+      responses:
+        '201': { description: Authorization evidence created; screeningExecuted=false }
+        '400': { description: Invalid request }
+        '401': { description: Unauthorized }
+components:
+  securitySchemes:
+    enrollmentAdmin:
+      type: apiKey
+      in: header
+      name: x-enrollment-admin-key
+  schemas:
+    ApplicationTrack:
+      type: string
+      enum: [prospective-student, transfer-student, foreign-exchange-student, rtpsc-new-hire-student, valid-ptin-holder]
+    InviteRequest:
+      type: object
+      required: [audience, recipientName, recipientEmail, programId]
+      properties:
+        audience: { $ref: '#/components/schemas/ApplicationTrack' }
+        recipientName: { type: string }
+        recipientEmail: { type: string, format: email }
+        programId: { type: string }
+        expiresDays: { type: integer, minimum: 1, maximum: 30, default: 14 }
+        inviterLabel: { type: string }
+    VerificationRecordRequest:
+      type: object
+      required: [applicationId, track, applicantName, applicantEmail]
+      properties:
+        applicationId: { type: string }
+        track: { $ref: '#/components/schemas/ApplicationTrack' }
+        applicantName: { type: string }
+        applicantEmail: { type: string, format: email }
+        references: { type: array, maxItems: 4, items: { type: object, additionalProperties: true } }
+        employmentHistory: { type: array, maxItems: 8, items: { type: object, additionalProperties: true } }
+        priorEducation: { type: array, maxItems: 8, items: { type: object, additionalProperties: true } }
+        fafsa: { type: object, additionalProperties: true }
+        transcriptConsent: { type: boolean }
+        referenceCheckConsent: { type: boolean }
+        employmentCheckConsent: { type: boolean }
+        educationVerificationConsent: { type: boolean }
+    BackgroundAuthorizationRequest:
+      type: object
+      required: [applicationId, applicantName, applicantEmail, ageGroup, purpose, requestedLevels, authorizationConsent, disclosureAcknowledgment, typedSignature, signedDate]
+      properties:
+        applicationId: { type: string }
+        applicantName: { type: string }
+        applicantEmail: { type: string, format: email }
+        ageGroup: { type: string, enum: [under-18, 18-plus] }
+        purpose: { type: string, enum: [employment, education-program-safety, credentialing-review] }
+        requestedLevels:
+          type: array
+          items: { type: string, enum: [federal, state, county] }
+        requestedStates:
+          type: array
+          items: { type: string, minLength: 2, maxLength: 2 }
+        requestedCounties:
+          type: array
+          description: Named county/state or FIPS entries. Provider evidence is required before claiming any jurisdiction was searched.
+          items: { type: string }
+        authorizationConsent: { type: boolean }
+        disclosureAcknowledgment: { type: boolean }
+        continuousAuthorizationRequested: { type: boolean }
+        typedSignature: { type: string }
+        signedDate: { type: string }
+        guardianName: { type: string }
+        guardianConsent: { type: boolean }
+        minorLegalReviewComplete: { type: boolean }
