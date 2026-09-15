@@ -1,9 +1,9 @@
 {
-  "version":"1.1.0",
+  "version":"2.0.0",
   "integrations":[
     {"id":"entra","provider":"Microsoft Entra ID","system":"identity","protocol":"OIDC/OAuth2","secretSource":"deployment-environment","healthRoute":"/api/integrations/entra"},
-    {"id":"google-classroom","provider":"Google Classroom","system":"lms-classroom","protocol":"OAuth2/REST","secretSource":"deployment-environment","healthRoute":"/api/integrations/google-classroom","apiRoute":"/api/classroom","config":"config/google-classroom.json"},
-    {"id":"reasoning","provider":"Ross Tax Pro Reasoning Machine","system":"reasoning","protocol":"internal-api","healthRoute":"/api/integrations/reasoning"},
+    {"id":"rtpu-ai-lms","provider":"Ross Tax Pro University","system":"native-ai-lms","protocol":"internal-versioned-api","healthRoute":"/api/lms","agentRoute":"/api/lms/agents","programRoute":"/api/lms/programs"},
+    {"id":"reasoning","provider":"Andreaa Channel Reasoning Engine","system":"reasoning","protocol":"internal-api","healthRoute":"/api/andreaa-channel/engine"},
     {"id":"tax","provider":"rtpsctaxplatform","system":"tax-platform","protocol":"versioned-api","healthRoute":"/api/integrations/tax"},
     {"id":"etrac","provider":"ross-primeweb-etrac","system":"etrac","protocol":"versioned-api","healthRoute":"/api/integrations/etrac"},
     {"id":"irsruntime","provider":"IRSRUNTIME","system":"irs-runtime","protocol":"versioned-api","healthRoute":"/api/integrations/irsruntime"},
@@ -11,5 +11,5 @@
     {"id":"storage","provider":"Object Storage","system":"content","protocol":"S3-compatible","secretSource":"deployment-environment","healthRoute":"/api/integrations/storage"},
     {"id":"analytics","provider":"Application Analytics","system":"governance","protocol":"event-stream","healthRoute":"/api/integrations/analytics"}
   ],
-  "requirements":["versioned contract","correlation id","timeout","retry policy","idempotency for writes","audit event","no secrets in source"]
+  "requirements":["versioned contract","correlation id","timeout","retry policy","idempotency for writes","audit event","no secrets in source","human approval for high-impact decisions"]
 }
