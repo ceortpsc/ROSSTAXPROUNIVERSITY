@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0",
+  "evidenceType": "rtpu-v3-production-release",
+  "observedDate": "2026-09-15",
+  "repository": "ceortpsc/ROSSTAXPROUNIVERSITY",
+  "source": {
+    "branch": "main",
+    "verifiedCommit": "0e9786d6166d4b432d1d3bd6959012342c97364e",
+    "commitMessage": "fix: close faculty dashboard grid and unblock v3 build"
+  },
+  "runtime": {
+    "applicationVersion": "3.0.0",
+    "stack": ["Fastify", "Vite", "React", "TypeScript", "tsup"],
+    "releaseChannel": "stable",
+    "nodeVersionObserved": "26.8.2"
+  },
+  "render": {
+    "serviceId": "srv-dagtjeht0dsc73fokt20",
+    "workspaceId": "tea-d8seq0mq1p3s73bkgek0",
+    "productionUrl": "https://rosstaxprouniversity.onrender.com",
+    "deployId": "dep-dakiqtrncjis73ddphdg",
+    "status": "live",
+    "finishedAtUtc": "2026-09-15T11:36:00.634932Z",
+    "rootProbe": {
+      "method": "HEAD",
+      "path": "/",
+      "httpStatus": 200,
+      "responseTimeMs": 171.44047
+    }
+  },
+  "buildEvidence": {
+    "npmInstall": "completed",
+    "dependencyAuditObservation": "1 low severity vulnerability reported by npm install",
+    "typecheck": "passed",
+    "clientBuild": {
+      "status": "passed",
+      "viteVersion": "8.3.0",
+      "transformedModules": 18,
+      "buildDurationMs": 125,
+      "indexHtmlKb": 0.58,
+      "cssKb": 7.55,
+      "cssGzipKb": 2.31,
+      "javascriptKb": 252.57,
+      "javascriptGzipKb": 76.48
+    },
+    "serverBuild": {
+      "status": "passed",
+      "tsupVersion": "8.5.1",
+      "target": "node20",
+      "buildDurationMs": 23,
+      "bundleKb": 60.26,
+      "sourceMapKb": 99.52
+    },
+    "renderBuild": "successful"
+  },
+  "implementedSurfaces": [
+    "/",
+    "/institution",
+    "/programs",
+    "/programs/:program",
+    "/student/dashboard",
+    "/faculty/dashboard",
+    "/records",
+    "/help",
+    "/engineering",
+    "/releases",
+    "/ai-assist",
+    "/evidence",
+    "/andreaa-channel",
+    "/andreaa-channel/engine",
+    "/andreaa-channel/platform",
+    "/admin/operations",
+    "/admin/integrations/google-classroom"
+  ],
+  "platformApis": [
+    "GET /api/platform",
+    "GET /api/platform/releases",
+    "GET /api/platform/routes",
+    "GET /api/platform/modules",
+    "GET /api/platform/principles",
+    "GET /api/platform/evidence",
+    "POST /api/andreaa-channel/assist"
+  ],
+  "releaseChannels": ["alpha", "beta", "rc", "stable", "next"],
+  "engineeringControls": [
+    "evidence-before-assertion",
+    "fail-closed-provider-writes",
+    "least-privilege-access",
+    "versioned-contracts",
+    "deterministic-release-gates",
+    "observability-by-default",
+    "idempotent-provider-provisioning",
+    "rollbackable-deployments",
+    "responsive-accessible-interfaces",
+    "performance-budget-enforcement",
+    "privacy-and-data-minimization",
+    "explicit-human-approval-for-high-impact-actions"
+  ],
+  "providerTruthBoundary": {
+    "googleClassroom": "Provider-side creation, roster mutation, OAuth authorization and coursework writes are not considered complete without Google-returned evidence.",
+    "syntheticProviderSuccess": false
+  },
+  "status": "production-live-with-dependency-advisory",
+  "openItems": [
+    "Investigate and remediate the single low-severity npm vulnerability before declaring dependency security fully clean.",
+    "Retain provider-returned evidence for Google Classroom provisioning and OAuth actions before marking those external actions complete."
+  ]
+}
