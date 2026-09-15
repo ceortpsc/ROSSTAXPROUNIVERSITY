@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "institution": "Ross Tax Pro University",
+  "adoptedBy": "Ross Tax Pro Software Co.",
+  "campus": {
+    "name": "RTPU Online Campus",
+    "productionUrl": "https://rosstaxprouniversity.onrender.com/institution",
+    "enrollmentUrl": "https://rtpu-enrollment.onrender.com/",
+    "launchTerm": "2026-2027",
+    "googleClassroomOwner": "ceo@rosstaxsoftware.com"
+  },
+  "theme": {
+    "name": "RTPU Institutional Navy Gold",
+    "tokens": {
+      "navy": "#0B1F3A",
+      "gold": "#D4AF37",
+      "silver": "#C0C0C0",
+      "cream": "#F7F2E8",
+      "black": "#111827",
+      "white": "#FFFFFF"
+    },
+    "layout": {
+      "hero": "institutional-banner",
+      "navigation": "pill-navigation",
+      "cards": "responsive-program-grid",
+      "status": "evidence-backed-runtime-panel",
+      "mobile": true,
+      "desktop": true
+    }
+  },
+  "lms": {
+    "provider": "Google Classroom",
+    "programCount": 7,
+    "courseShellCount": 68,
+    "ownerId": "ceo@rosstaxsoftware.com",
+    "courseNaming": "[COURSE CODE] — [COURSE TITLE]",
+    "sectionNaming": "[TERM] | [PROGRAM TITLE]",
+    "courseStateRequested": "ACTIVE",
+    "autolaunch": true,
+    "idempotency": "name+section",
+    "authorizationRequired": true
+  },
+  "pages": [
+    "/institution",
+    "/signin/student",
+    "/signin/teacher",
+    "/admin/integrations/google-classroom",
+    "/andreaa-channel",
+    "/andreaa-channel/engine",
+    "/andreaa-channel/platform",
+    "/admin/operations"
+  ],
+  "programs": [
+    { "id": "adult-hs-diploma", "title": "Adult Education High School Diploma", "courses": 21 },
+    { "id": "texas-homeschool-diploma", "title": "Texas Homeschool Diploma", "courses": 21 },
+    { "id": "early-college-readiness", "title": "Early College & College Readiness", "courses": 6 },
+    { "id": "tax-professional-certificate-i", "title": "Tax Professional Certificate I", "courses": 6 },
+    { "id": "tax-professional-certificate-ii", "title": "Tax Professional Certificate II", "courses": 6 },
+    { "id": "tax-practitioner-4-semester-diploma", "title": "Tax Practitioner Diploma — 4 Semester Program", "courses": 4 },
+    { "id": "enrolled-agent-prep", "title": "Enrolled Agent Preparation", "courses": 4 }
+  ],
+  "evidencePolicy": {
+    "classroomCreated": "Only when Google Classroom API returns a created course ID",
+    "classroomExisting": "Only when an existing course matches name and section",
+    "blocked": "Report blocked-authorization-required when provider credentials are unavailable",
+    "noSimulation": true
+  }
+}
