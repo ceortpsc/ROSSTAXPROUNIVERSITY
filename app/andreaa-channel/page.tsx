@@ -25,11 +25,17 @@ export default function AndreaaChannelPage() {
         </header>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 14, marginTop: 18 }}>
-          <div style={metricCard}><strong style={metricValue}>5×</strong><span>internal scheduling / usage multiplier</span></div>
-          <div style={metricCard}><strong style={metricValue}>Priority</strong><span>Ultra LTE queue class</span></div>
+          <div style={metricCard}><strong style={metricValue}>5×</strong><span>Ultra LTE internal scheduling / usage multiplier</span></div>
+          <div style={metricCard}><strong style={metricValue}>10 tiers</strong><span>standalone engineering capacity ladder</span></div>
           <div style={metricCard}><strong style={metricValue}>Real-time</strong><span>orchestration mode</span></div>
           <div style={metricCard}><strong style={metricValue}>Passthrough</strong><span>provider entitlement policy</span></div>
         </div>
+
+        <a href="/andreaa-channel/engine" style={{ display: 'block', marginTop: 18, textDecoration: 'none', background: '#0b1f3a', color: '#fff', border: '1px solid #c9a227', borderRadius: 16, padding: 20 }}>
+          <div style={{ color: '#d4af37', fontSize: 12, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 1.2 }}>Standalone runtime</div>
+          <div style={{ fontSize: 22, fontWeight: 900, marginTop: 5 }}>Open Andreaa 10-Tier Engineering Engine →</div>
+          <div style={{ color: '#e5e7eb', marginTop: 6 }}>Reasoning, architecture, blueprint planning, building, code writing, generation, execution orchestration, client application development, fundamentals, pioneer mode and expert SDE review.</div>
+        </a>
 
         <section style={{ marginTop: 22 }}>
           <h2 style={{ color: '#0b1f3a' }}>Capability matrix</h2>
@@ -52,8 +58,8 @@ export default function AndreaaChannelPage() {
           </div>
         </section>
 
-        <aside style={{ marginTop: 22, padding: 18, border: '1px solid #e3c565', background: '#fff8df', borderRadius: 14, lineHeight: 1.55 }}>
-          <strong>Entitlement rule:</strong> Ultra LTE increases Andreaa Channel’s own scheduling and usage ceiling by 5×. It does not create Google AI Ultra, Deep Think, Flow, Antigravity, Jules or Project Genie entitlement. Those remain subject to Google account, subscription, regional, age and product-access rules.
+        <aside style={{ marginTop: 22, padding: 18, borderRadius: 14, background: '#fff8df', border: '1px solid #e3c565' }}>
+          Ultra LTE and the 10-tier engine control Andreaa Channel's own orchestration. External provider capabilities remain gated by real provider credentials, subscriptions, quotas, regional access and eligibility.
         </aside>
       </section>
     </main>
