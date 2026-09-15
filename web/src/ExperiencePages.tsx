@@ -15,7 +15,7 @@ const programs: Program[] = [
 
 const releases = [
   ['Alpha', 'Architecture experiments and internal capability discovery', 'design-reviewed + security-reviewed'],
-  ['Beta', 'Integrated feature validation with production-safe provider gates', 'contract-stable + observability-ready'],
+  ['Beta', 'Integrated feature validation with production-safe execution gates', 'contract-stable + observability-ready'],
   ['Release Candidate', 'Frozen interfaces, rollback evidence and launch rehearsal', 'release-checklist-complete'],
   ['Stable', 'Current production campus and supported interfaces', 'deployed + health-evidence'],
   ['Next', 'Forward-compatible roadmap and staged improvements', 'explicit promotion only']
@@ -37,8 +37,8 @@ function useJson(path: string) {
 
 function Page({ eyebrow, title, summary, children }: { eyebrow: string; title: string; summary: string; children: React.ReactNode }) {
   return <main className="page-shell"><section className="page-width">
-    <header className="hero hero-premium"><div className="eyebrow">{eyebrow}</div><h1>{title}</h1><p>{summary}</p><div className="hero-actions"><a className="button-link button-gold" href="/programs">Explore Programs</a><a className="button-link button-ghost" href="https://rtpu-enrollment.onrender.com/">Apply / Enroll</a></div></header>
-    <nav className="top-nav" aria-label="Campus"><a href="/institution">Campus</a><a href="/programs">Programs</a><a href="/student/dashboard">Student</a><a href="/faculty/dashboard">Faculty</a><a href="/records">Records</a><a href="/ai-assist">AI Assist</a><a href="/engineering">Engineering</a><a href="/releases">Releases</a><a href="/help">Help</a></nav>
+    <header className="hero hero-premium"><div className="eyebrow">{eyebrow}</div><h1>{title}</h1><p>{summary}</p><div className="hero-actions"><a className="button-link button-gold" href="/ai-campus">Open AI Campus</a><a className="button-link button-ghost" href="https://rtpu-enrollment.onrender.com/">Apply / Enroll</a></div></header>
+    <nav className="top-nav" aria-label="Campus"><a href="/institution">Campus</a><a href="/ai-campus">AI LMS</a><a href="/ai-lecture">Lecture Studio</a><a href="/programs">Programs</a><a href="/student/dashboard">Student</a><a href="/faculty/dashboard">Faculty</a><a href="/records">Records</a><a href="/ai-assist">AI Assist</a><a href="/engineering">Engineering</a><a href="/releases">Releases</a><a href="/help">Help</a></nav>
     {children}
   </section></main>;
 }
@@ -46,8 +46,8 @@ function Page({ eyebrow, title, summary, children }: { eyebrow: string; title: s
 function Stat({ value, label }: { value: string; label: string }) { return <div className="metric metric-premium"><strong>{value}</strong><span>{label}</span></div>; }
 
 export function ProgramsPage() {
-  return <Page eyebrow="Academic Catalog" title="Programs built for completion, practice and progression" summary="RTPU unifies secondary, college-readiness and tax-professional pathways with admissions, LMS delivery, student records and evidence-backed provider integration.">
-    <div className="metric-grid"><Stat value="7" label="institutional programs"/><Stat value="68" label="seeded LMS course shells"/><Stat value="4" label="diploma semesters"/><Stat value="2026–2027" label="launch term"/></div>
+  return <Page eyebrow="Academic Catalog" title="Programs built for completion, practice and progression" summary="RTPU unifies secondary, college-readiness and tax-professional pathways with admissions, native AI learning delivery, student records and evidence-oriented academic support.">
+    <div className="metric-grid"><Stat value="7" label="institutional programs"/><Stat value="13" label="AI university agents"/><Stat value="4" label="diploma semesters"/><Stat value="100%" label="online delivery"/></div>
     <section className="card-grid">{programs.map(program => <article className="card card-premium" key={program.id}><span className="card-eyebrow">{program.type}</span><h3>{program.title}</h3><p>{program.summary}</p><div className="card-actions"><a className="text-cta" href={`/programs/${program.id}`}>View program →</a><a className="text-cta" href="https://rtpu-enrollment.onrender.com/">{program.cta} →</a></div></article>)}</section>
   </Page>;
 }
@@ -56,21 +56,21 @@ export function ProgramDetailPage({ id }: { id: string }) {
   const program = programs.find(item => item.id === id) || programs[0];
   const diploma = program.id === 'tax-practitioner-diploma';
   return <Page eyebrow={program.type} title={program.title} summary={program.summary}>
-    <div className="two-column"><section className="panel"><h2>Program outcomes</h2><ul className="feature-list"><li>Structured online learning path</li><li>Google Classroom-ready delivery model</li><li>Admissions and signed application workflow</li><li>Records, support and progress interfaces</li><li>Evidence-aware completion and external-provider boundaries</li></ul></section><section className="panel"><h2>Enrollment actions</h2><p>Complete the appropriate RTPU application track. External credentials, licensure, financial aid or government status are never represented as approved until the responsible authority verifies them.</p><a className="button-link" href="https://rtpu-enrollment.onrender.com/">Start application</a></section></div>
+    <div className="two-column"><section className="panel"><h2>Program outcomes</h2><ul className="feature-list"><li>Structured RTPU-native online learning path</li><li>AI lecture, tutoring and assessment support</li><li>Admissions and signed application workflow</li><li>Records, support and progress interfaces</li><li>Evidence-aware completion and human-reviewed high-impact decisions</li></ul></section><section className="panel"><h2>Enrollment actions</h2><p>Complete the appropriate RTPU application track. External credentials, licensure, financial aid or government status are never represented as approved until the responsible authority verifies them.</p><a className="button-link" href="https://rtpu-enrollment.onrender.com/">Start application</a></section></div>
     {diploma ? <section className="panel"><h2>Four-semester diploma sequence</h2><div className="journey"><div><strong>Semester 1</strong><span>Foundations & Individual Taxation</span></div><div><strong>Semester 2</strong><span>Business, Payroll & Applied Tax Preparation</span></div><div><strong>Semester 3</strong><span>ERO Operations, e-File & Practice Security</span></div><div><strong>Semester 4</strong><span>Representation, Notices, Collections & Capstone</span></div></div></section> : null}
   </Page>;
 }
 
 export function StudentDashboardPage() {
-  return <Page eyebrow="Student Experience" title="Student dashboard" summary="A unified workspace for program progress, Classroom access, records, support, milestones and next actions.">
-    <div className="metric-grid"><Stat value="My Program" label="active pathway"/><Stat value="Classroom" label="course delivery"/><Stat value="Records" label="transcript & documents"/><Stat value="Support" label="student services"/></div>
-    <section className="dashboard-grid"><a className="workspace-card" href="/programs"><strong>Learning plan</strong><span>Programs, courses and progression</span></a><a className="workspace-card" href="/admin/integrations/google-classroom"><strong>Google Classroom</strong><span>Provider connection and course access</span></a><a className="workspace-card" href="/records"><strong>Academic records</strong><span>Enrollment records and transcript requests</span></a><a className="workspace-card" href="/help"><strong>Student services</strong><span>Help, accessibility and enrollment support</span></a></section>
+  return <Page eyebrow="Student Experience" title="Student dashboard" summary="A unified workspace for program progress, AI lectures, adaptive tutoring, records, support, milestones and next actions.">
+    <div className="metric-grid"><Stat value="My Program" label="active pathway"/><Stat value="AI Campus" label="learning delivery"/><Stat value="Records" label="transcript & documents"/><Stat value="Support" label="student services"/></div>
+    <section className="dashboard-grid"><a className="workspace-card" href="/programs"><strong>Learning plan</strong><span>Programs, courses and progression</span></a><a className="workspace-card" href="/ai-lecture"><strong>AI Lecture Studio</strong><span>Structured lectures, worked reasoning and mastery checks</span></a><a className="workspace-card" href="/records"><strong>Academic records</strong><span>Enrollment records and transcript requests</span></a><a className="workspace-card" href="/help"><strong>Student services</strong><span>Help, accessibility and enrollment support</span></a></section>
   </Page>;
 }
 
 export function FacultyDashboardPage() {
-  return <Page eyebrow="Faculty Experience" title="Faculty operations workspace" summary="Instructional delivery, rosters, coursework, program mapping and quality controls in one faculty-facing surface.">
-    <div className="dashboard-grid"><a className="workspace-card" href="/admin/integrations/google-classroom"><strong>Classroom operations</strong><span>Courses, teachers, rosters and coursework</span></a><a className="workspace-card" href="/programs"><strong>Curriculum map</strong><span>Institution programs and course sequences</span></a><a className="workspace-card" href="/engineering"><strong>Quality standards</strong><span>Evidence, accessibility and release principles</span></a><a className="workspace-card" href="/help"><strong>Faculty support</strong><span>Platform and instructional support</span></a></div>
+  return <Page eyebrow="Faculty Experience" title="Faculty operations workspace" summary="Instructional delivery, curriculum design, assessment architecture, agent-assisted planning and quality controls in one faculty-facing surface.">
+    <div className="dashboard-grid"><a className="workspace-card" href="/ai-campus"><strong>AI LMS operations</strong><span>Programs, lectures, tutoring and assessment architecture</span></a><a className="workspace-card" href="/ai-assessment"><strong>Assessment Studio</strong><span>Rubrics, formative evidence and remediation plans</span></a><a className="workspace-card" href="/engineering"><strong>Quality standards</strong><span>Evidence, accessibility and release principles</span></a><a className="workspace-card" href="/ai-agents"><strong>AI Faculty Mesh</strong><span>Lecturer, tutor, advisor, quality and operations agents</span></a></div>
   </Page>;
 }
 
@@ -81,15 +81,15 @@ export function RecordsPage() {
 }
 
 export function HelpPage() {
-  return <Page eyebrow="Student Services" title="Help center" summary="Clear pathways for enrollment, LMS access, records, accessibility, technical support and institutional questions.">
-    <section className="card-grid"><article className="card"><h3>Enrollment support</h3><p>Applications, invites, transfer/exchange intake and new-hire student workflows.</p><a className="text-cta" href="https://rtpu-enrollment.onrender.com/">Open enrollment →</a></article><article className="card"><h3>LMS support</h3><p>Google Classroom authorization, course access and provider status.</p><a className="text-cta" href="/admin/integrations/google-classroom">Open LMS status →</a></article><article className="card"><h3>Platform support</h3><p>Runtime health, production operations and release evidence.</p><a className="text-cta" href="/admin/operations">Open operations →</a></article></section>
+  return <Page eyebrow="Student Services" title="Help center" summary="Clear pathways for enrollment, AI LMS access, records, accessibility, technical support and institutional questions.">
+    <section className="card-grid"><article className="card"><h3>Enrollment support</h3><p>Applications, invites, transfer/exchange intake and new-hire student workflows.</p><a className="text-cta" href="https://rtpu-enrollment.onrender.com/">Open enrollment →</a></article><article className="card"><h3>AI LMS support</h3><p>Lectures, tutoring, assessments, advising and agent-powered learning workflows.</p><a className="text-cta" href="/ai-campus">Open AI Campus →</a></article><article className="card"><h3>Platform support</h3><p>Runtime health, production operations and release evidence.</p><a className="text-cta" href="/admin/operations">Open operations →</a></article></section>
   </Page>;
 }
 
 export function EngineeringPage() {
-  return <Page eyebrow="Engineering System" title="Production engineering principles" summary="RTPU uses explicit contracts, fail-closed provider writes, evidence-before-assertion and release gates to keep the platform fast, observable and supportable.">
-    <section className="principle-grid">{['Evidence before assertion','Fail closed on provider writes','Least privilege','Versioned contracts','Deterministic release gates','Observability by default','Idempotent provisioning','Rollbackable deployments','Accessible responsive interfaces','Performance budgets','Privacy & data minimization','Human approval for high-impact actions'].map((item,index)=><div className="principle" key={item}><span>{String(index+1).padStart(2,'0')}</span><strong>{item}</strong></div>)}</section>
-    <section className="panel"><h2>Runtime architecture</h2><div className="journey"><div><strong>Client</strong><span>React + Vite</span></div><div><strong>API</strong><span>Fastify + TypeScript</span></div><div><strong>AI Assist</strong><span>Andreaa 10-tier engine</span></div><div><strong>LMS</strong><span>Google Classroom adapter</span></div><div><strong>Deployment</strong><span>GitHub → Render</span></div></div></section>
+  return <Page eyebrow="Engineering System" title="Production engineering principles" summary="RTPU uses explicit contracts, evidence-before-assertion and release gates to keep the AI university fast, observable and supportable.">
+    <section className="principle-grid">{['Evidence before assertion','Human approval for high-impact actions','Least privilege','Versioned contracts','Deterministic release gates','Observability by default','First-party LMS ownership','Rollbackable deployments','Accessible responsive interfaces','Performance budgets','Privacy & data minimization','Clear labeling of generated instruction'].map((item,index)=><div className="principle" key={item}><span>{String(index+1).padStart(2,'0')}</span><strong>{item}</strong></div>)}</section>
+    <section className="panel"><h2>Runtime architecture</h2><div className="journey"><div><strong>Client</strong><span>React + Vite</span></div><div><strong>API</strong><span>Fastify + TypeScript</span></div><div><strong>Reasoning</strong><span>Andreaa 10-tier engine</span></div><div><strong>LMS</strong><span>RTPU Native AI LMS</span></div><div><strong>Deployment</strong><span>GitHub → Render</span></div></div></section>
   </Page>;
 }
 
@@ -100,8 +100,8 @@ export function ReleasesPage() {
 }
 
 export function AiAssistPage() {
-  const [objective, setObjective] = useState('Review the RTPU online institution architecture and produce the next production engineering blueprint.');
-  const [context, setContext] = useState('Prioritize reliability, accessible UX, provider-safe integrations, evidence and performance.');
+  const [objective, setObjective] = useState('Review the RTPU AI university architecture and produce the next production engineering blueprint.');
+  const [context, setContext] = useState('Prioritize reliability, accessible UX, first-party learning systems, evidence and performance.');
   const [result, setResult] = useState<Json | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
