@@ -13,6 +13,7 @@ const nav: Card[] = [
   { title: 'Andreaa Channel', description: 'Capability and entitlement dashboard.', href: '/andreaa-channel', eyebrow: 'AI Operations' },
   { title: '10-Tier Engine', description: 'Reasoning, architecture, blueprint and engineering control plane.', href: '/andreaa-channel/engine', eyebrow: 'Engineering' },
   { title: 'Platform', description: 'OpenAPI, LMS, governance, deployment and operations.', href: '/andreaa-channel/platform', eyebrow: 'Control Plane' },
+  { title: 'Enrollment', description: 'Invite, apply, electronically sign, convert and export RTPU program applications.', href: 'https://rtpu-enrollment.onrender.com/', eyebrow: 'Admissions & Onboarding' },
   { title: 'Operations', description: 'Health, security, maintenance, quotas and topology.', href: '/admin/operations', eyebrow: 'Production' },
   { title: 'Google Classroom', description: 'OAuth and Classroom integration control surface.', href: '/admin/integrations/google-classroom', eyebrow: 'LMS' }
 ];
