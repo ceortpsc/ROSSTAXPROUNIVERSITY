@@ -7,5 +7,5 @@
   "staff": ["/staff", "/staff/onboarding", "/staff/student-services", "/staff/tickets", "/staff/communications", "/ai-agents", "/engineering", "/releases", "/ai-assist"],
   "administration": ["/admin", "/admin/identity", "/admin/rbac", "/admin/policies", "/admin/finance", "/admin/reports", "/admin/audit", "/admin/settings", "/admin/operations", "/evidence"],
   "developer": ["/developer", "/developer/routes", "/developer/apis", "/developer/integrations", "/developer/deployments", "/developer/logs", "/developer/feature-flags", "/andreaa-channel/engine", "/andreaa-channel/platform"],
-  "api": ["/api/health", "/api/platform", "/api/platform/evidence", "/api/lms", "/api/lms/agents", "/api/lms/programs", "/api/lms/lecture", "/api/lms/learning-plan", "/api/lms/assessment", "/api/andreaa-channel/engine", "/api/andreaa-channel/assist", "/api/ops/overview", "/api/ops/health"]
+  "api": ["/api/health", "/api/platform", "/api/platform/evidence", "/api/lms", "/api/lms/agents", "/api/lms/programs", "/api/lms/lecture", "/api/lms/learning-plan", "/api/lms/assessment", "/api/records/registry", "/api/records/templates", "/api/records/templates/:artifactId", "/api/records/schema", "/api/records/queries", "/api/andreaa-channel/engine", "/api/andreaa-channel/assist", "/api/ops/overview", "/api/ops/health"]
 }
