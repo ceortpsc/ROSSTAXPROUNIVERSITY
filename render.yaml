@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: ROSSTAXPROUNIVERSITY
+    runtime: node
+    repo: https://github.com/ceortpsc/ROSSTAXPROUNIVERSITY.git
+    branch: main
+    autoDeploy: true
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: RTPU_DEPLOY_ENV
+        value: production
+      - key: PUBLIC_BASE_URL
+        value: https://rosstaxprouniversity.onrender.com
+      - key: RTPU_MAINTENANCE_MODE
+        value: "false"
+      - key: GOOGLE_CLASSROOM_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLASSROOM_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_CLASSROOM_REDIRECT_URI
+        sync: false
+      - key: GOOGLE_CLASSROOM_REFRESH_TOKEN
+        sync: false
+      - key: GOOGLE_CLASSROOM_OAUTH_STATE_SECRET
+        sync: false
+      - key: RTPU_CLASSROOM_INTEGRATION_KEY
+        sync: false
+      - key: OPS_ADMIN_KEY
+        sync: false
