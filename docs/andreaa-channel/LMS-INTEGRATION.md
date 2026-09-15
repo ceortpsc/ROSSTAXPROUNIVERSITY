@@ -1,222 +1,138 @@
-# Andreaa Channel LMS Integration Guide
+# RTPU Native AI LMS — Architecture and Operations Guide
 
 ## Scope
 
-Andreaa Channel exposes a provider-neutral LMS integration plane with a live Google Classroom connector and source-controlled adapter contracts for Canvas, Moodle and Blackboard Learn.
+Ross Tax Pro University now uses a first-party learning runtime rather than an external classroom provider. The active production LMS is the **RTPU Native AI LMS**, coordinated by Andreaa Channel and a specialized AI university agent mesh.
 
-The registry is implemented in:
+Core implementation:
 
 ```text
+lib/ai-university.ts
 lib/lms-integration.ts
-app/api/lms/integrations/route.ts
+server/ai-lms-routes.ts
+web/src/AiUniversityPages.tsx
 ```
 
 Runtime inventory:
 
 ```bash
-curl -sS https://rosstaxprouniversity.onrender.com/api/lms/integrations
+curl -sS https://rosstaxprouniversity.onrender.com/api/lms
+curl -sS https://rosstaxprouniversity.onrender.com/api/lms/agents
+curl -sS https://rosstaxprouniversity.onrender.com/api/lms/programs
 ```
 
-## Provider status semantics
+## Learning runtime
 
-- `active` - required production configuration is present and the adapter is considered runtime-ready; external authorization must still be evaluated separately where applicable.
-- `configured` - tenant endpoint and required credentials/flags are present for the adapter.
-- `adapter-ready` - code contract exists but required provider configuration is absent.
-- `disabled` - the provider was intentionally disabled.
+The native LMS provides:
 
-## Google Classroom
+```text
+course catalog
+program pathways
+AI lecture simulation
+adaptive tutoring architecture
+practice generation
+assessment blueprints
+rubrics and remediation planning
+student dashboard
+faculty dashboard
+records routing
+admissions routing
+accessibility support
+academic quality checks
+career coaching
+agent orchestration
+```
 
-### Required environment
+The active runtime has no external LMS dependency.
+
+## AI university agent mesh
+
+The platform registers specialized agents for:
+
+- academic/provost planning
+- lecturing
+- tutoring
+- advising
+- assessment design
+- registrar support
+- admissions intake support
+- student success
+- faculty copilot work
+- academic quality
+- university operations
+- accessibility
+- career/practice coaching
+
+Agent specialization is used to separate responsibilities and prevent a single assistant from silently assuming authority across unrelated institutional functions.
+
+## Lecture simulation
+
+Create a lecture session:
 
 ```bash
-GOOGLE_CLASSROOM_CLIENT_ID=<oauth-client-id>
-GOOGLE_CLASSROOM_CLIENT_SECRET=<oauth-client-secret>
-GOOGLE_CLASSROOM_REDIRECT_URI=https://rosstaxprouniversity.onrender.com/api/integrations/google-classroom/oauth/callback
+curl -sS -X POST https://rosstaxprouniversity.onrender.com/api/lms/lecture \
+  -H 'content-type: application/json' \
+  -d '{"topic":"Federal tax filing status fundamentals","level":"career / tax practitioner","objectives":["define the rules","work an example","check understanding"]}'
 ```
 
-### OAuth sequence
+The runtime produces a structured instructional flow with orientation, teaching, worked reasoning, practice, retrieval checks, transfer and recap stages. Generated instruction is explicitly labeled as AI-generated or simulated instruction.
 
-```text
-1. Browser opens /api/integrations/google-classroom/oauth/start
-2. RTPU creates signed state and redirects to Google
-3. User signs into the intended Google account
-4. User approves requested Classroom scopes
-5. Google redirects to the RTPU callback
-6. RTPU validates signed state
-7. RTPU exchanges authorization code for tokens
-8. RTPU verifies userProfiles/me and courses.list
-9. RTPU creates sanitized consent evidence
-10. RTPU creates short-lived one-time refresh-token handoff
-```
-
-Start authorization:
-
-```text
-https://rosstaxprouniversity.onrender.com/api/integrations/google-classroom/oauth/start
-```
-
-The authorization must be initiated in the same browser session used to complete consent. Do not initiate the stateful flow with `curl` and then finish in a different browser session.
-
-### Redirect URI rule
-
-The Google OAuth client must include this exact authorized redirect URI:
-
-```text
-https://rosstaxprouniversity.onrender.com/api/integrations/google-classroom/oauth/callback
-```
-
-A mismatch in scheme, hostname, path or trailing slash produces `redirect_uri_mismatch`.
-
-### Requested scopes
-
-The connector requests Classroom course, roster, coursework and profile-email access. Scope approval remains controlled by Google and the Workspace administrator/account policy.
-
-### Horizontal-scaling caveat
-
-The current one-time credential handoff store is process-memory based. In a multi-instance or ephemeral/serverless deployment, callback and handoff consumption can land on different instances. Before relying on horizontal scale for the OAuth handoff, move the handoff store to a durable encrypted secret store or database with TTL semantics.
-
-## Canvas LMS
-
-Adapter environment:
+## Learning-plan generation
 
 ```bash
-LMS_CANVAS_ENABLED=true
-CANVAS_API_BASE_URL=https://tenant.instructure.com/api/v1
-CANVAS_ACCESS_TOKEN=<secret>
+curl -sS -X POST https://rosstaxprouniversity.onrender.com/api/lms/learning-plan \
+  -H 'content-type: application/json' \
+  -d '{"goal":"Complete Semester 1 of the Tax Practitioner Diploma","programId":"tax-practitioner-diploma"}'
 ```
 
-Expected capabilities:
+The plan uses the Andreaa Tier-10 engineering/reasoning engine to build sequencing, checkpoints, practice, feedback loops, accessibility and student-success interventions.
 
-```text
-courses
-enrollments
-assignments
-submissions
-grades
-```
-
-Production activation requires a tenant-issued API token or OAuth application with the permissions required for the intended actions. Tokens must not be committed to the repository.
-
-## Moodle
-
-Adapter environment:
+## Assessment architecture
 
 ```bash
-LMS_MOODLE_ENABLED=true
-MOODLE_API_BASE_URL=https://tenant.example.edu/webservice/rest/server.php
-MOODLE_TOKEN=<secret>
+curl -sS -X POST https://rosstaxprouniversity.onrender.com/api/lms/assessment \
+  -H 'content-type: application/json' \
+  -d '{"topic":"Taxpayer data security and due diligence"}'
 ```
 
-Expected capabilities:
+Assessment output is a formative blueprint. Where institutional rules require human grading, certification or academic judgment, the human/institutional authority remains controlling.
+
+## Roles and access
+
+The native LMS recognizes platform-admin, LMS-admin, instructor, registrar, student and auditor roles. Least privilege applies to every route and future persistence layer.
+
+High-impact actions—including final admissions decisions, employment decisions, credential-authority determinations and other regulated outcomes—must not be delegated solely to an automated agent.
+
+## Data and evidence principles
+
+1. Minimize sensitive student data.
+2. Keep operational APIs `no-store` by default.
+3. Preserve deterministic identifiers and evidence hashes for generated sessions where applicable.
+4. Label generated instruction clearly.
+5. Do not represent an external credential, government status or regulated outcome as verified unless the responsible authority verified it.
+6. Require human authorization for high-impact decisions.
+7. Keep release and runtime evidence separate from marketing claims.
+
+## Performance model
+
+The AI LMS uses the same Fastify/Vite/React production runtime as the institution shell. Current performance budgets are registered in `lib/platform-evolution.ts` and production build sizes are captured in release evidence.
+
+## Persistence boundary
+
+The current AI lecture, assessment and learning-plan APIs are stateless generation services. Admissions already uses the separate RTPU enrollment service. Durable student-progress, gradebook, submissions and transcript persistence require an authorized production datastore before those features may be represented as persistent.
+
+This boundary is deliberate: the platform does not claim durable records that it has not actually stored.
+
+## Production verification
+
+Verify the active runtime with:
 
 ```text
-courses
-users
-enrollments
-assignments
-grades
+GET /api/health
+GET /api/lms
+GET /api/lms/agents
+GET /api/platform/evidence
+GET /api/ops/health
 ```
 
-Moodle web services must be enabled by the Moodle administrator and the token must be bound to a service/function set that follows least privilege.
-
-## Blackboard Learn
-
-Adapter environment:
-
-```bash
-LMS_BLACKBOARD_ENABLED=true
-BLACKBOARD_API_BASE_URL=https://tenant.example.edu/learn/api/public/v1
-BLACKBOARD_CLIENT_ID=<client-id>
-BLACKBOARD_CLIENT_SECRET=<secret>
-```
-
-Expected capabilities:
-
-```text
-courses
-users
-memberships
-content
-grades
-```
-
-The application must be registered with the Blackboard tenant and granted the minimum REST privileges required by the intended workflow.
-
-## Course provisioning model
-
-Andreaa uses provider-neutral metadata as the source representation:
-
-```json
-{
-  "code": "ELA-1",
-  "title": "English I",
-  "term": "Fall 2026",
-  "program": "Adult HS Diploma",
-  "section": "A",
-  "state": "active"
-}
-```
-
-Provider-specific adapters translate that representation into the LMS provider's course schema.
-
-Recommended Google Classroom display format:
-
-```text
-[CODE] - [COURSE TITLE] | [TERM] | [PROGRAM]
-```
-
-Example:
-
-```text
-ELA-1 - English I | Fall 2026 | Adult HS Diploma
-```
-
-## Enrollment and roster rules
-
-1. Student identity must be resolved before enrollment mutation.
-2. Duplicate enrollment operations should be idempotent.
-3. Withdrawal/deletion is treated as a higher-impact mutation and should preserve an audit trail.
-4. Instructor and registrar permissions are distinct.
-5. Bulk roster actions require explicit scope and a preview/reconciliation step when supported.
-6. Provider errors must be retained as provider errors; Andreaa must not translate a failed provider mutation into success.
-
-## Grade synchronization
-
-Grade writes should include:
-
-- provider course ID
-- provider assignment/coursework ID
-- learner provider ID
-- source grade
-- normalized grade if transformation occurs
-- timestamp
-- initiating role
-- provider response identifier where available
-
-Grade synchronization should not be enabled until the provider adapter and authorization state have been verified end-to-end.
-
-## Privacy and security
-
-- Retrieve only fields needed for the workflow.
-- Avoid storing provider tokens in browser storage.
-- Avoid logging student records unnecessarily.
-- Separate application role authorization from provider authorization.
-- Apply tenant/provider restrictions in addition to local RBAC.
-- Do not infer an academic outcome from incomplete LMS data.
-
-## Integration test sequence
-
-Development and production verification should follow:
-
-```text
-1. registry reports expected provider state
-2. authentication/authorization succeeds
-3. read-only profile/tenant probe succeeds
-4. course-list read succeeds
-5. scoped sandbox or authorized course mutation succeeds where applicable
-6. roster read/reconciliation succeeds
-7. coursework/grade operation succeeds where enabled
-8. audit record captures non-secret evidence
-```
-
-Do not skip from configuration presence directly to "fully integrated" status.
+A source commit alone is not production evidence. A release is production-live only after the Render build succeeds, the service reaches `live`, startup completes and the root/API probes succeed.
