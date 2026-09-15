@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0",
+  "institution": "Ross Tax Pro University",
+  "programs": [
+    { "id": "adult-hs-diploma", "title": "Adult Education High School Diploma", "category": "secondary", "audiences": ["prospective-student", "new-hire"], "active": true },
+    { "id": "texas-homeschool-diploma", "title": "Texas Homeschool Diploma", "category": "secondary", "audiences": ["prospective-student"], "active": true },
+    { "id": "early-college-readiness", "title": "Early College & College Readiness", "category": "college-readiness", "audiences": ["prospective-student"], "active": true },
+    { "id": "tax-professional-certificate-i", "title": "Tax Professional Certificate I", "category": "tax-professional", "audiences": ["prospective-student", "new-hire"], "active": true },
+    { "id": "tax-professional-certificate-ii", "title": "Tax Professional Certificate II", "category": "tax-professional", "audiences": ["prospective-student", "new-hire"], "active": true },
+    { "id": "tax-practitioner-diploma", "title": "Tax Practitioner Diploma", "category": "tax-professional", "audiences": ["prospective-student", "new-hire"], "active": true },
+    { "id": "enrolled-agent-prep", "title": "Enrolled Agent Preparation", "category": "tax-professional", "audiences": ["prospective-student", "new-hire"], "active": true }
+  ]
+}
