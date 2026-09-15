@@ -1,13 +1,43 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "institution": "Ross Tax Pro University",
+  "applicationTracks": [
+    "prospective-student",
+    "transfer-student",
+    "foreign-exchange-student",
+    "rtpsc-new-hire-student",
+    "valid-ptin-holder"
+  ],
   "programs": [
-    { "id": "adult-hs-diploma", "title": "Adult Education High School Diploma", "category": "secondary", "audiences": ["prospective-student", "new-hire"], "active": true },
-    { "id": "texas-homeschool-diploma", "title": "Texas Homeschool Diploma", "category": "secondary", "audiences": ["prospective-student"], "active": true },
-    { "id": "early-college-readiness", "title": "Early College & College Readiness", "category": "college-readiness", "audiences": ["prospective-student"], "active": true },
-    { "id": "tax-professional-certificate-i", "title": "Tax Professional Certificate I", "category": "tax-professional", "audiences": ["prospective-student", "new-hire"], "active": true },
-    { "id": "tax-professional-certificate-ii", "title": "Tax Professional Certificate II", "category": "tax-professional", "audiences": ["prospective-student", "new-hire"], "active": true },
-    { "id": "tax-practitioner-diploma", "title": "Tax Practitioner Diploma", "category": "tax-professional", "audiences": ["prospective-student", "new-hire"], "active": true },
-    { "id": "enrolled-agent-prep", "title": "Enrolled Agent Preparation", "category": "tax-professional", "audiences": ["prospective-student", "new-hire"], "active": true }
-  ]
+    { "id": "adult-hs-diploma", "title": "Adult Education High School Diploma", "category": "secondary", "audiences": ["prospective-student", "transfer-student"], "active": true },
+    { "id": "texas-homeschool-diploma", "title": "Texas Homeschool Diploma", "category": "secondary", "audiences": ["prospective-student", "transfer-student"], "active": true },
+    { "id": "early-college-readiness", "title": "Early College & College Readiness", "category": "college-readiness", "audiences": ["prospective-student", "transfer-student", "foreign-exchange-student"], "active": true },
+    { "id": "foreign-exchange-academic-track", "title": "Foreign Exchange Academic Track", "category": "college-readiness", "audiences": ["foreign-exchange-student"], "active": true },
+    { "id": "rtpsc-new-hire-tax-training", "title": "RTPSC New Hire Tax Practitioner Training", "category": "workforce-training", "audiences": ["rtpsc-new-hire-student"], "active": true },
+    { "id": "tax-professional-certificate-i", "title": "Tax Professional Certificate I", "category": "tax-professional", "audiences": ["prospective-student", "transfer-student", "rtpsc-new-hire-student", "valid-ptin-holder"], "active": true },
+    { "id": "tax-professional-certificate-ii", "title": "Tax Professional Certificate II", "category": "tax-professional", "audiences": ["prospective-student", "transfer-student", "rtpsc-new-hire-student", "valid-ptin-holder"], "active": true },
+    {
+      "id": "tax-practitioner-4-semester-diploma",
+      "title": "Tax Practitioner Diploma — 4 Semester Program",
+      "category": "tax-professional",
+      "audiences": ["prospective-student", "rtpsc-new-hire-student", "valid-ptin-holder"],
+      "semesters": 4,
+      "credential": "Institutional Diploma",
+      "ptinPolicy": {
+        "format": "P########",
+        "attestationRequired": true,
+        "independentVerificationRequired": true,
+        "automaticAdmissionOnFormatMatch": false
+      },
+      "active": true
+    },
+    { "id": "enrolled-agent-prep", "title": "Enrolled Agent Preparation", "category": "tax-professional", "audiences": ["prospective-student", "rtpsc-new-hire-student", "valid-ptin-holder"], "active": true }
+  ],
+  "admissionsControls": {
+    "automaticAdmissionFromBackgroundCheck": false,
+    "automaticEmploymentDecisionFromBackgroundCheck": false,
+    "ptinFormatCheckIsNotValidityVerification": true,
+    "foreignExchangeImmigrationDocumentReviewIsSeparate": true,
+    "fafsaFederalSubmissionOccursOutsideRTPU": true
+  }
 }
