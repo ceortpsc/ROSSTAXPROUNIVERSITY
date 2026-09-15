@@ -19,7 +19,13 @@ function run(command, commandArgs) {
 }
 
 async function verify() {
-  const endpoints = ['/api/health', '/api/andreaa-channel/engine?tier=10', '/api/lms/integrations'];
+  const endpoints = [
+    '/api/health',
+    '/api/lms',
+    '/api/lms/agents',
+    '/api/andreaa-channel/engine?tier=10',
+    '/api/platform/evidence'
+  ];
   for (const endpoint of endpoints) {
     const response = await fetch(`${verifyUrl.replace(/\/$/, '')}${endpoint}`, { headers: { accept: 'application/json' } });
     if (!response.ok) throw new Error(`verification failed ${endpoint}: HTTP ${response.status}`);
