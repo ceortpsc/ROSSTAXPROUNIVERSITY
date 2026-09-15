@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Json = Record<string, unknown>;
 type Program = { id: string; title: string; type: string; summary: string; cta: string };
@@ -70,7 +70,7 @@ export function StudentDashboardPage() {
 
 export function FacultyDashboardPage() {
   return <Page eyebrow="Faculty Experience" title="Faculty operations workspace" summary="Instructional delivery, rosters, coursework, program mapping and quality controls in one faculty-facing surface.">
-    <div className="dashboard-grid"><a className="workspace-card" href="/admin/integrations/google-classroom"><strong>Classroom operations</strong><span>Courses, teachers, rosters and coursework</span></a><a className="workspace-card" href="/programs"><strong>Curriculum map</strong><span>Institution programs and course sequences</span></a><a className="workspace-card" href="/engineering"><strong>Quality standards</strong><span>Evidence, accessibility and release principles</span></a><a className="workspace-card" href="/help"><strong>Faculty support</strong><span>Platform and instructional support</span></a></section>
+    <div className="dashboard-grid"><a className="workspace-card" href="/admin/integrations/google-classroom"><strong>Classroom operations</strong><span>Courses, teachers, rosters and coursework</span></a><a className="workspace-card" href="/programs"><strong>Curriculum map</strong><span>Institution programs and course sequences</span></a><a className="workspace-card" href="/engineering"><strong>Quality standards</strong><span>Evidence, accessibility and release principles</span></a><a className="workspace-card" href="/help"><strong>Faculty support</strong><span>Platform and instructional support</span></a></div>
   </Page>;
 }
 
