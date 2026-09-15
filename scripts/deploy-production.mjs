@@ -24,7 +24,11 @@ async function verify() {
     '/api/lms',
     '/api/lms/agents',
     '/api/andreaa-channel/engine?tier=10',
-    '/api/platform/evidence'
+    '/api/platform/evidence',
+    '/api/records/registry',
+    '/api/records/templates',
+    '/api/records/schema',
+    '/api/records/queries'
   ];
   for (const endpoint of endpoints) {
     const response = await fetch(`${verifyUrl.replace(/\/$/, '')}${endpoint}`, { headers: { accept: 'application/json' } });
