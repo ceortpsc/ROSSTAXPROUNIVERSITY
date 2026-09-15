@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0",
+  "platformVersion": "3.0.0",
+  "defaultChannel": "stable",
+  "channels": [
+    { "id": "alpha", "publicDefault": false, "purpose": "Architecture experiments and internal capability discovery", "promotionGate": ["design-reviewed", "security-reviewed"] },
+    { "id": "beta", "publicDefault": false, "purpose": "Integrated feature validation with production-safe provider gates", "promotionGate": ["contract-stable", "observability-ready"] },
+    { "id": "rc", "publicDefault": false, "purpose": "Production candidate with frozen interfaces and rollback evidence", "promotionGate": ["release-checklist-complete"] },
+    { "id": "stable", "publicDefault": true, "purpose": "Supported production campus", "promotionGate": ["deployed", "health-evidence"] },
+    { "id": "next", "publicDefault": false, "purpose": "Forward-compatible roadmap and staged enhancements", "promotionGate": ["explicit-promotion"] }
+  ]
+}
