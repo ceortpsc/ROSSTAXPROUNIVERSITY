@@ -10,6 +10,7 @@ import { getAndreaaRuntimeSnapshot } from '../lib/andreaa-channel';
 import { getLmsSnapshot } from '../lib/lms-integration';
 import { registerPlatformRoutes } from './platform-routes';
 import { registerAiLmsRoutes } from './ai-lms-routes';
+import { registerCredentialRecordsRoutes } from './credential-records-routes';
 
 const app = Fastify({
   logger: {
@@ -201,6 +202,7 @@ app.post('/api/ops/maintenance', async (request, reply) => {
 
 await registerPlatformRoutes(app);
 await registerAiLmsRoutes(app);
+await registerCredentialRecordsRoutes(app);
 
 await app.register(staticPlugin, {
   root: webRoot,
