@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "engine": "Andreaa Channel Standalone Engineering Engine",
+  "engineVersion": "10.0.0",
+  "productionMode": "standalone-control-plane",
+  "defaultTier": 10,
+  "tiers": [
+    {"level":1,"name":"Core","capacityMultiplier":1,"parallelStages":1,"planningDepth":1,"maxBlueprintNodes":8},
+    {"level":2,"name":"Rapid","capacityMultiplier":2,"parallelStages":2,"planningDepth":2,"maxBlueprintNodes":12},
+    {"level":3,"name":"Builder","capacityMultiplier":3,"parallelStages":3,"planningDepth":3,"maxBlueprintNodes":18},
+    {"level":4,"name":"Architect","capacityMultiplier":4,"parallelStages":4,"planningDepth":4,"maxBlueprintNodes":24},
+    {"level":5,"name":"Studio","capacityMultiplier":5,"parallelStages":6,"planningDepth":5,"maxBlueprintNodes":32},
+    {"level":6,"name":"Professional","capacityMultiplier":6,"parallelStages":8,"planningDepth":6,"maxBlueprintNodes":40},
+    {"level":7,"name":"Expert","capacityMultiplier":7,"parallelStages":12,"planningDepth":7,"maxBlueprintNodes":52},
+    {"level":8,"name":"Enterprise","capacityMultiplier":8,"parallelStages":16,"planningDepth":8,"maxBlueprintNodes":64},
+    {"level":9,"name":"Pioneer","capacityMultiplier":9,"parallelStages":24,"planningDepth":9,"maxBlueprintNodes":80},
+    {"level":10,"name":"Apex","capacityMultiplier":10,"parallelStages":32,"planningDepth":10,"maxBlueprintNodes":100}
+  ],
+  "competencies": [
+    "reasoning-agent",
+    "ai-persona",
+    "architect",
+    "blueprint-planner",
+    "builder",
+    "code-writer",
+    "generator",
+    "executionist",
+    "client-app-developer",
+    "fundamentals-principles",
+    "pioneer",
+    "sde-expert"
+  ],
+  "executionPolicy": {
+    "sourceControlled": true,
+    "evidenceRequired": true,
+    "destructiveActionsRequireExplicitApproval": true,
+    "providerQuotaBypass": false,
+    "simulatedProductionSuccess": false
+  },
+  "productionSurfaces": {
+    "dashboard": "/andreaa-channel/engine",
+    "api": "/api/andreaa-channel/engine"
+  }
+}
