@@ -1,23 +1,26 @@
 import { useEffect, useMemo, useState } from 'react';
 import InstitutionPage from './InstitutionPage';
 import { routeExperience } from './ExperiencePages';
+import { routeAiUniversity } from './AiUniversityPages';
 
 type JsonValue = Record<string, unknown>;
 type Card = { title: string; description: string; href: string; eyebrow: string };
 
 const nav: Card[] = [
-  { title: 'Online Institution', description: 'Full RTPU online campus, programs, admissions and LMS delivery.', href: '/institution', eyebrow: 'University' },
+  { title: 'Online Institution', description: 'Full RTPU online campus, programs, admissions and native AI learning delivery.', href: '/institution', eyebrow: 'University' },
+  { title: 'AI Campus', description: 'RTPU-native AI LMS for instruction, tutoring, assessment, advising and university operations.', href: '/ai-campus', eyebrow: 'AI University' },
+  { title: 'AI Lecture Studio', description: 'Structured lecture simulations with reasoning, practice and mastery checks.', href: '/ai-lecture', eyebrow: 'Instruction' },
+  { title: 'AI Faculty', description: 'Specialized reasoning agents for the full university operating model.', href: '/ai-agents', eyebrow: 'Agent Mesh' },
   { title: 'Programs', description: 'Secondary, college-readiness and tax-professional programs.', href: '/programs', eyebrow: 'Academic Catalog' },
   { title: 'Student', description: 'Student learning, records and support workspace.', href: '/student/dashboard', eyebrow: 'Student Experience' },
-  { title: 'Faculty', description: 'Faculty course, roster and quality-control workspace.', href: '/faculty/dashboard', eyebrow: 'Faculty Experience' },
-  { title: 'Andreaa Channel', description: 'Capability and entitlement dashboard.', href: '/andreaa-channel', eyebrow: 'AI Operations' },
+  { title: 'Faculty', description: 'Faculty course, curriculum and quality-control workspace.', href: '/faculty/dashboard', eyebrow: 'Faculty Experience' },
+  { title: 'Andreaa Channel', description: 'Capability and reasoning-agent dashboard.', href: '/andreaa-channel', eyebrow: 'AI Operations' },
   { title: 'AI Assist', description: 'Tier-10 architecture and production blueprint assistant.', href: '/ai-assist', eyebrow: 'Engineering Assist' },
   { title: '10-Tier Engine', description: 'Reasoning, architecture, blueprint and engineering control plane.', href: '/andreaa-channel/engine', eyebrow: 'Engineering' },
   { title: 'Engineering', description: 'Principles, architecture and quality standards.', href: '/engineering', eyebrow: 'Platform' },
   { title: 'Releases', description: 'Alpha, beta, RC, stable and next promotion model.', href: '/releases', eyebrow: 'Release Engineering' },
   { title: 'Enrollment', description: 'Invite, apply, electronically sign, convert and export applications.', href: 'https://rtpu-enrollment.onrender.com/', eyebrow: 'Admissions & Onboarding' },
-  { title: 'Operations', description: 'Health, security, maintenance, quotas and topology.', href: '/admin/operations', eyebrow: 'Production' },
-  { title: 'Google Classroom', description: 'OAuth and Classroom integration control surface.', href: '/admin/integrations/google-classroom', eyebrow: 'LMS' }
+  { title: 'Operations', description: 'Health, security, maintenance, quotas and topology.', href: '/admin/operations', eyebrow: 'Production' }
 ];
 
 function useJson(path: string) {
@@ -36,7 +39,7 @@ function useJson(path: string) {
 
 function Shell({ children, title, eyebrow = 'Ross Tax Pro University' }: { children: React.ReactNode; title: string; eyebrow?: string }) {
   return <main className="page-shell"><section className="page-width">
-    <header className="hero hero-premium"><div className="eyebrow">{eyebrow}</div><h1>{title}</h1><p>RTPU production campus powered by Fastify, Vite, React, Google Classroom, admissions services and the Andreaa Channel engineering control plane.</p><div className="hero-actions"><a className="button-link button-gold" href="/programs">Explore Programs</a><a className="button-link button-ghost" href="https://rtpu-enrollment.onrender.com/">Apply / Enroll</a></div></header>
+    <header className="hero hero-premium"><div className="eyebrow">{eyebrow}</div><h1>{title}</h1><p>RTPU is a 100% online institution powered by its own Fastify/Vite platform, native AI learning runtime, admissions services and the Andreaa Channel reasoning and engineering control plane.</p><div className="hero-actions"><a className="button-link button-gold" href="/ai-campus">Open AI Campus</a><a className="button-link button-ghost" href="https://rtpu-enrollment.onrender.com/">Apply / Enroll</a></div></header>
     <nav className="top-nav" aria-label="Primary">{nav.map(item => <a key={item.href} href={item.href}>{item.title}</a>)}</nav>
     {children}
   </section></main>;
@@ -53,7 +56,7 @@ function EnginePage() {
 }
 
 function BlueprintConsole() {
-  const [objective, setObjective] = useState('Design a production-ready LMS enrollment workflow with role-based access, audit evidence and provider-safe retries.');
+  const [objective, setObjective] = useState('Design a production-ready AI LMS enrollment and instruction workflow with role-based access, audit evidence and safe execution gates.');
   const [result, setResult] = useState<JsonValue | null>(null);
   const [busy, setBusy] = useState(false);
   async function run() { setBusy(true); try { const response = await fetch('/api/andreaa-channel/engine',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({objective,tier:10})}); const body=await response.json(); if(!response.ok) throw new Error(body.error||`HTTP ${response.status}`); setResult(body); } finally { setBusy(false); } }
@@ -63,38 +66,32 @@ function BlueprintConsole() {
 function PlatformPage() {
   const engine = useJson('/api/andreaa-channel/engine?tier=10');
   const lms = useJson('/api/lms/integrations');
-  const providerCount = Array.isArray(lms.data?.providers) ? (lms.data.providers as unknown[]).length : 0;
-  return <Shell title="Andreaa Production Engineering Platform" eyebrow="Architecture • Contracts • LMS • Governance • Deployment"><div className="metric-grid"><Metric value={String((engine.data?.tier as Record<string, unknown>|undefined)?.level??'10')} label="active engine tier"/><Metric value={String(providerCount)} label="LMS adapters"/><Metric value="OpenAPI 3.1" label="contract format"/><Metric value="Fastify + Vite" label="runtime stack"/></div><Cards/><Notice>Fastify owns the API/server layer and Vite builds the React client bundle.</Notice></Shell>;
+  return <Shell title="Andreaa Production Engineering Platform" eyebrow="Architecture • Native AI LMS • Governance • Deployment"><div className="metric-grid"><Metric value={String((engine.data?.tier as Record<string, unknown>|undefined)?.level??'10')} label="active engine tier"/><Metric value={lms.data?.provider ? 'Native' : 'Checking'} label="LMS runtime"/><Metric value="OpenAPI 3.1" label="contract format"/><Metric value="Fastify + Vite" label="runtime stack"/></div><Cards/><Notice>RTPU owns the LMS runtime directly; external LMS dependencies are removed from the active production architecture.</Notice></Shell>;
 }
 
 function AndreaaPage() {
   const { data, error } = useJson('/api/andreaa-channel/capabilities?plan=ultra-lte');
   const capabilities = Array.isArray(data?.capabilities) ? data.capabilities as Array<Record<string, unknown>> : [];
-  return <Shell title="Andreaa Channel — Ultra LTE" eyebrow="AI Operations"><div className="metric-grid"><Metric value="10×" label="Apex internal capacity ceiling"/><Metric value="Real-time" label="orchestration mode"/><Metric value="Evidence" label="completion policy"/><Metric value="Provider-safe" label="external entitlement policy"/></div>{error?<Notice tone="error">Capability API error: {error}</Notice>:null}<div className="card-grid">{capabilities.map(capability=><article className="card" key={String(capability.id)}><span className="card-eyebrow">{String(capability.category||'capability')}</span><h3>{String(capability.label)}</h3><p>{String(capability.description||'')}</p><div className="status-row"><strong>{String(capability.status)}</strong><span>{String(capability.provider)}</span></div></article>)}</div></Shell>;
+  return <Shell title="Andreaa Channel — Ultra LTE" eyebrow="AI Operations"><div className="metric-grid"><Metric value="10×" label="Apex internal capacity ceiling"/><Metric value="13" label="AI university agents"/><Metric value="Evidence" label="completion policy"/><Metric value="Native LMS" label="learning runtime"/></div>{error?<Notice tone="error">Capability API error: {error}</Notice>:null}<div className="card-grid">{capabilities.map(capability=><article className="card" key={String(capability.id)}><span className="card-eyebrow">{String(capability.category||'capability')}</span><h3>{String(capability.label)}</h3><p>{String(capability.description||'')}</p><div className="status-row"><strong>{String(capability.status)}</strong><span>{String(capability.provider)}</span></div></article>)}</div></Shell>;
 }
 
 function OperationsPage() {
   const overview=useJson('/api/ops/overview'); const health=useJson('/api/ops/health');
-  return <Shell title="Operations Control Center" eyebrow="Production Operations"><div className="metric-grid"><Metric value={health.data?.ok===true?'Healthy':'Checking'} label="runtime health"/><Metric value="Fastify" label="server"/><Metric value="Vite" label="client build"/><Metric value="No-store" label="API cache policy"/></div><section className="panel"><h2>Runtime snapshot</h2><pre className="code-block">{JSON.stringify(overview.data??{loading:true},null,2)}</pre></section><a className="button-link" href="/evidence">Open production evidence</a></Shell>;
-}
-
-function ClassroomPage() {
-  const {data,error}=useJson('/api/integrations/google-classroom');
-  return <Shell title="Google Classroom Integration" eyebrow="LMS • OAuth 2.0 • Institutional Launch">{error?<Notice tone="error">Connector error: {error}</Notice>:null}<div className="metric-grid"><Metric value="68" label="seeded course shells"/><Metric value="7" label="programs"/><Metric value="ceo@rosstaxsoftware.com" label="institutional owner"/><Metric value="2026–2027" label="launch term"/></div><div className="two-column"><section className="panel"><h2>Connector & launch status</h2><pre className="code-block">{JSON.stringify(data??{loading:true},null,2)}</pre></section><section className="panel"><h2>Authorization</h2><p>Google consent must be completed by the institutional account before the API can create or manage Classroom resources.</p><a className="button-link" href="/api/integrations/google-classroom/oauth/start">Authorize Google Classroom</a><p className="muted">After a valid refresh token is persisted, the production autolaunch engine provisions the seeded catalog idempotently.</p></section></div></Shell>;
+  return <Shell title="Operations Control Center" eyebrow="Production Operations"><div className="metric-grid"><Metric value={health.data?.ok===true?'Healthy':'Checking'} label="runtime health"/><Metric value="Fastify" label="server"/><Metric value="Vite" label="client build"/><Metric value="AI LMS" label="learning runtime"/></div><section className="panel"><h2>Runtime snapshot</h2><pre className="code-block">{JSON.stringify(overview.data??{loading:true},null,2)}</pre></section><a className="button-link" href="/evidence">Open production evidence</a></Shell>;
 }
 
 function AccessPage({role}:{role:string}) { return <Shell title={`${role} Access`} eyebrow="Identity & Access"><section className="panel"><h2>Access gateway</h2><p>Role-provider wiring remains configuration-driven for RTPU online programs.</p><a className="button-link" href={role==='Student'?'/student/dashboard':role==='Teacher'?'/faculty/dashboard':'/institution'}>Continue</a></section></Shell>; }
-function HomePage(){ return <Shell title="Ross Tax Pro University — Online Institution" eyebrow="Production Runtime v3"><div className="metric-grid"><Metric value="7" label="institutional programs"/><Metric value="68" label="Google Classroom shells"/><Metric value="5" label="release channels"/><Metric value="10-tier" label="Andreaa engineering engine"/></div><Cards/></Shell>; }
+function HomePage(){ return <Shell title="Ross Tax Pro University — AI-Powered Online Institution" eyebrow="Production Runtime v4"><div className="metric-grid"><Metric value="100%" label="online university"/><Metric value="13" label="reasoning agents"/><Metric value="7" label="institutional programs"/><Metric value="0" label="external LMS dependencies"/></div><Cards/></Shell>; }
 
 export default function App() {
   const path=useMemo(()=>window.location.pathname.replace(/\/$/,'')||'/',[]);
+  const ai=routeAiUniversity(path); if(ai) return ai;
   const experience=routeExperience(path); if(experience) return experience;
   if(path==='/institution') return <InstitutionPage/>;
   if(path==='/andreaa-channel/engine') return <EnginePage/>;
   if(path==='/andreaa-channel/platform') return <PlatformPage/>;
   if(path==='/andreaa-channel') return <AndreaaPage/>;
   if(path==='/admin/operations') return <OperationsPage/>;
-  if(path==='/admin/integrations/google-classroom') return <ClassroomPage/>;
   if(path==='/signin/student'||path==='/student') return <AccessPage role="Student"/>;
   if(path==='/signin/teacher'||path==='/teacher') return <AccessPage role="Teacher"/>;
   if(path==='/signin') return <AccessPage role="Secure Sign-In"/>;
