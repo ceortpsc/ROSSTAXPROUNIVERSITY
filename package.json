@@ -1,22 +1,40 @@
 {
   "name": "rosstaxprouniversity",
   "private": true,
-  "version": "1.0.2",
+  "version": "2.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "concurrently -k -n api,web \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "cross-env PORT=8787 tsx watch server/server.ts",
+    "dev:web": "vite --host 0.0.0.0",
+    "build": "npm run build:web && npm run build:server",
+    "build:web": "vite build",
+    "build:server": "tsup server/server.ts --format esm --platform node --target node20 --out-dir dist-server --sourcemap --clean",
+    "start": "node dist-server/server.js",
+    "typecheck": "tsc --noEmit",
+    "andreaa": "node scripts/andreaa-cli.mjs",
+    "preflight": "node scripts/production-preflight.mjs",
+    "deploy:production": "node scripts/deploy-production.mjs"
   },
   "dependencies": {
-    "next": "latest",
+    "@fastify/compress": "latest",
+    "@fastify/helmet": "latest",
+    "@fastify/static": "latest",
+    "fastify": "latest",
     "react": "latest",
     "react-dom": "latest"
   },
   "devDependencies": {
-    "typescript": "^5.7.3",
+    "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
-    "@types/node": "^22.10.0"
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "latest",
+    "concurrently": "latest",
+    "cross-env": "latest",
+    "tsup": "latest",
+    "tsx": "latest",
+    "typescript": "^5.7.3",
+    "vite": "latest"
   },
   "engines": {
     "node": ">=20 <27"
